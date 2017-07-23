@@ -1,0 +1,72 @@
+body{
+	background-color: #53a1cf;
+}
+
+form{
+	/*background-color: white;
+	background: rgba(255,255,255,0.8);*/
+	width:400px;
+	margin:100px auto;
+	display: block;
+}
+
+.container{
+	width: 100%;
+}
+
+.signcontent{
+	width: 300px;
+	margin:0px 50px auto;
+	display: block;	
+}
+
+.form-horizontal{
+    background: rgba(255,255,255,0.6);
+    padding-bottom: 40px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+h3{
+        padding-top:50px;
+        text-align:left;
+        font-size: 30px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+
+    }
+
+.form-horizontal .form-group{
+    padding: 0 40px;
+    margin: 0 0 5px 0;
+    position: relative;
+}
+
+.form-horizontal .form-group .fa{
+	display: inline-block;
+	top: 27px;
+	left: 6px;
+	position: relative;
+	float: left;
+	color: #ccc;
+}  
+
+input[type="text"],input[type="password"]{
+	padding-left:26px;
+}  
+
+.iradio{
+	display: inline-block;
+	margin:5px 0px;
+	padding:0px 10px;
+}
+
+.signpos{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+}
+label{
+	margin: 0px 10px;
+	font-size: 12px;
+}

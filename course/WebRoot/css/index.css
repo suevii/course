@@ -1,0 +1,21 @@
+.logo {
+	display: inline-block;
+	heigh:60px;
+	line-height:60px;
+	font-size: 28px;
+	color:white;
+	position: absolute;
+	left: 40px;
+}
+.layui-nav {
+	background-color: #23262E!important;
+}
+.layui-nav.daohang{
+	position: absolute;
+	right: 0;
+	width:400px;
+	
+}
+.layui-nav.daohang li a{
+	background-color: ##23262E;
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.multipart.maxSize" value="20971520" /> <!-- 设置允许最大值  20MB(1024*1024*20) -->  
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<package name="default" extends="struts-default" namespace="/">
+		<action name="login" class="action.LoginAction">
+			<result name="student">/student/studentMain.jsp</result>
+			<result name="teacher">/teacher/teacherMain.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+		<action name="course" class="action.CourseAction">
+			<result name="teacher">/teacher/homework.jsp</result>
+			<result name="student">/student/homework.jsp</result>
+		</action>
+		<action name="named" class="action.Named">
+			<result name="success">/teacher/named.jsp</result>
+		</action>
+		<action name="addTask" class="action.AddTaskAction">
+			<result name="success">/teacher/homework.jsp</result>
+			<result name="error">/teacher/update_error.jsp</result>
+		</action>
+		<action name="deleteTask" class="action.DeleteTaskAction">
+			<result name="success">/teacher/homework.jsp</result>
+			<result name="error">/teacher/update_error.jsp</result>
+		</action>
+		<action name="upload" class="action.UploadAction">
+			<result name="success">/teacher/upload.jsp</result>
+			<interceptor-ref name="fileUpload">  
+      	<param name="maximumSize">52428800</param>  	<!-- 50MB -->
+      </interceptor-ref>  
+      <interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<action name="delete" class="action.DeleteAction">
+			<result name="success">/teacher/upload.jsp</result>
+		</action>
+		<action name="download" class="action.DownloadAction">
+			<result name="success" type="stream">  
+        <param name="contentType">text/plain</param>  
+        <!-- 下载处理方式 -->
+        <param name="contentDisposition">attachment;fileName="${fileName}"</param>  	
+        <!-- 文件的来源流信息 -->
+        <param name="inputName">inputStream</param>  
+        <param name="bufferSize">52428800</param>  	<!-- 50MB -->
+    	</result>  
+		</action>
+		<action name="MailSend" class="action.mail_send">
+			<result name="success">/mail/mail_send.jsp</result>
+			<result name="error">/mail/error.jsp</result>
+		</action>
+	</package>
+	<constant name="struts.multipart.saveDir" value="/tmp"></constant>
+</struts>    
