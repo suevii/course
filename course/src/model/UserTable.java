@@ -29,7 +29,6 @@ public class UserTable  implements Comparable<UserTable>{
 	public void setLevel(int level) {
 		this.level = level;
 	}
-	@Override
 	public int compareTo(UserTable o) {
 		String id=o.getId();
 		return this.id.compareTo(id);

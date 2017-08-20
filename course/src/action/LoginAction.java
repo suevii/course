@@ -31,13 +31,13 @@ public class LoginAction extends ActionSupport{
 		int level = -1;
 		if(character.equals("student")){
 			sql = "select * from student";
-			idcmp = "snum";
+			idcmp = "sNum";
 			next = "student";
 			level = 0;
 		}
 		else{
 			sql = "select * from teacher";
-			idcmp = "tnum";
+			idcmp = "tNum";
 			next ="teacher";
 			level = 1;
 		}

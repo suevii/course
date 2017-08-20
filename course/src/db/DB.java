@@ -12,6 +12,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import factory.HibernateSessionFactory;
 import model.Homework;
 import model.MailTable;
 import model.MyFile;
@@ -19,17 +23,20 @@ import model.NamedTime;
 import model.OpenCourse;
 import model.StudentCourse;
 import model.UserTable;
+import model.vo.Course;
+import model.vo.Open;
+import model.vo.Select;
+import model.vo.Teacher;
 public class DB {
 	private String DBname = "course_manage";
 	private String DBuser = "root";
-	private String DBpwd = "ad56880040";
+	private String DBpwd = "960321";
 	Connection ct = null;
 	private Statement stmt;
 	private Connection conn;
 	private PreparedStatement pstmt;
 	ResultSet rs;
 
-	
 	public DB() {
 		stmt = null;
 		try {
@@ -112,24 +119,34 @@ public class DB {
 
 	public ArrayList getStudentCourse(String snum) {// 获取学生的课程
 		try {
-
-			pstmt = conn.prepareStatement(
-					"SELECT s.open_id,s.snum,c.cnum,t.tnum,c.cname,t.tname,s.term FROM `select` s,teacher t, course c WHERE c.cnum=s.cnum and t.tnum=s.tnum and s.snum=?;");
-			pstmt.setString(1, snum);
-
 			ArrayList al = new ArrayList();
-
+			pstmt = conn.prepareStatement(
+					"SELECT s.open_id, s.sNum, c.cNum, t.tNum, c.cName, t.tName, o.cTerm "
+					+ "FROM `select` s,teacher t, course c, open o "
+					+ "WHERE s.sNum=? and o.open_id=s.open_id and o.tNum=t.tNum and o.cNum=c.cNum;");
+			pstmt.setString(1, snum);
 			ResultSet rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
-				StudentCourse course = new StudentCourse();
-				course.setSnum(rs.getString("snum"));
-				course.setCnum(rs.getString("cnum"));
-				course.setCname(rs.getString("cname"));
-				course.setTnum(rs.getString("tnum"));
-				course.setTname(rs.getString("tname"));
-				course.setTerm(rs.getInt("term"));
-				course.setOpen_id(rs.getLong("s.open_id"));
-				al.add(course);
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				Course course = new Course();
+				course.setCnum(rs.getString("cNum"));
+				course.setCname(rs.getString("cName"));
+				Teacher teacher = new Teacher();
+				teacher.setTnum(rs.getString("tNum"));
+				teacher.setTname(rs.getString("tName"));
+				Open open = new Open();
+				open.setCterm(rs.getInt("cTerm"));
+				Select select = new Select();
+				//select.setId(rs.getLong("s.open_id"));
+				
+//				course.setSnum(rs.getString("sNum"));
+//				course.setOpen_id(rs.getLong("s.open_id"));
+				map.put("course", course);
+				map.put("teacher", teacher);
+				map.put("open", open);
+				map.put("select", select);
+				al.add(map);
 			}
 			return al;
 		} catch (Exception e) {
