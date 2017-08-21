@@ -12,27 +12,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     <title>文件下载</title> 
-	<link rel="stylesheet" type="text/css" href="/course/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/course/css/bootstrap-table.css">
+		<link rel="stylesheet" type="text/css" href="/course/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/course/css/bootstrap-table.css">
   </head>
   
   <body>
 
    	<div class="panel panel-default" style="margin:30px;">
-   	
-   		
 			<div class="panel-heading">
 				<h2 class="panel-title">文件下载</h2>
 			</div>
 			<div class="layui-form">
-				<table class="layui-table" lay-skin="line"style="text-align:center">
+				<table class="layui-table" lay-skin="line" style="text-align:center">
 					<thead>
 						<tr>
 							<th style="text-align:center">文件名称</th>
-				            <th style="text-align:center">上传时间</th>
-				            <th style="text-align:center">操作</th>
-				        </tr>
-	       		   </thead>
+	            <th style="text-align:center">上传时间</th>
+	            <th style="text-align:center">操作</th>
+	        	</tr>
+					</thead>
 	        <%
 	        	UserTable user = (UserTable)session.getAttribute("user");	//student
 	        	String userId = user.getId();

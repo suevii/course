@@ -138,13 +138,6 @@ public class DB {
 				open.setCterm(rs.getInt("cTerm"));     
 				Select select = new Select();
 				select.setOpen_id(rs.getLong("open_id"));
-<<<<<<< HEAD
-				
-//				course.setSnum(rs.getString("sNum"));
-//				course.setOpen_id(rs.getLong("s.open_id"));
-=======
-
->>>>>>> 3c4907571d76d550f38f4148a0c623471665fdd7
 				map.put("course", course);
 				map.put("teacher", teacher);
 				map.put("open", open);

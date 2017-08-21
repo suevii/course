@@ -1,8 +1,9 @@
-<%@ page language="java" import="java.util.*,model.UserTable" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,model.UserTable,java.sql.*,db.DB" pageEncoding="UTF-8"%>
 <%
 String path = request.getRequestURI();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
 %>
+<jsp:useBean id="MySQLDB" class="db.DB"></jsp:useBean>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,6 +31,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</blockquote>
 				热门课程展示
 				<br>
+				<table class="layui-table" lay-skin="line" style="text-align:center">
+					<thead>
+						<tr>
+							<th style="text-align:center">开课号</th>
+	            <th style="text-align:center">课程号</th>
+	            <th style="text-align:center">课程名</th>
+	            <th style="text-align:center">教师号</th>
+	            <th style="text-align:center">教师名</th>
+	            <th style="text-align:center">选课人数</th>
+	        	</tr>
+					</thead>
+					<%
+						String sql = "select O.open_id, C.cNum, cName, T.tNum, tName, count(DISTINCT S.sNum) as '选课人数' "
+													+ "from course C, `open` O, `select` S, teacher T "
+													+ "where O.open_id=S.open_id and C.cNum=O.cNum and T.tNum=O.tNum "
+													+ "GROUP BY C.cNum, cName, T.tNum "
+													+ "ORDER BY count(S.sNum) desc ";
+						ResultSet rs = MySQLDB.executeQuery(sql);
+	        	while(rs.next()){
+	        		String open_id = rs.getString(1);
+	        		String cNum = rs.getString(2);
+	        		String cName = rs.getString(3);
+	        		String tNum = rs.getString(4);
+	        		String tName = rs.getString(5);
+	        		String count = rs.getString(6);
+	        %>
+	        		<tr>
+			  					<td><input type="hidden" name="file.name" value="<%= open_id %>"><%= open_id %></td>
+			  					<td><input type="hidden" name="" value="<%= cNum %>"><%= cNum %></td>
+			  					<td><input type="hidden" name="" value="<%= cName %>"><%= cName %></td>
+			  					<td><input type="hidden" name="" value="<%= tNum %>"><%= tNum %></td>
+			  					<td><input type="hidden" name="" value="<%= tName %>"><%= tName %></td>
+			  					<td><input type="hidden" name="" value="<%= count %>"><%= count %></td>
+		  				</tr>
+	 				<%
+						}
+					%>
+				</table>
 			</div>
 	</div>
 </body>
