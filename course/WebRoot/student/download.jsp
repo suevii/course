@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*,model.UserTable" pageEncoding="UTF-8"%>
+<jsp:useBean id="DB" scope="page" class = "db.DB" />
 <%
 String path = request.getRequestURI();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
@@ -16,6 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta http-equiv="description" content="This is my page">
 		<link rel="stylesheet" href="/course/layui/css/layui.css">
 		<link rel="stylesheet" href="/course/css/index.css">
+
 </head>
 <body>
 	<div class="layui-layout layui-layout-admin">

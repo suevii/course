@@ -29,8 +29,8 @@ import model.vo.Select;
 import model.vo.Teacher;
 public class DB {
 	private String DBname = "course_manage";
-	private String DBuser = "root";
-	private String DBpwd = "960321";
+	private String DBuser = "course";
+	private String DBpwd = "123456";
 	Connection ct = null;
 	private Statement stmt;
 	private Connection conn;
@@ -136,9 +136,10 @@ public class DB {
 				teacher.setTnum(rs.getString("tNum"));
 				teacher.setTname(rs.getString("tName"));
 				Open open = new Open();
-				open.setCterm(rs.getInt("cTerm"));
+				//open.setOpenId(rs.getLong("s.open_id"));    
+				open.setCterm(rs.getInt("cTerm"));     
 				Select select = new Select();
-				//select.setId(rs.getLong("s.open_id"));
+				select.setOpen_id(rs.getLong("s.open_id"));
 				
 //				course.setSnum(rs.getString("sNum"));
 //				course.setOpen_id(rs.getLong("s.open_id"));

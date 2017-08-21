@@ -17,6 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta http-equiv="description" content="This is my page">
 		<link rel="stylesheet" href="/course/layui/css/layui.css">
 		<link rel="stylesheet" href="/course/css/index.css">
+
 </head>
 <body>
 	<div class="layui-layout layui-layout-admin">

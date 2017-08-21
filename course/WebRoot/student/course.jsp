@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	  				Course course = (Course)map.get("course");
  	  				Teacher teacher = (Teacher)map.get("teacher");
  	  				Open open = (Open)map.get("open");
- 	  				//Select select = (Select)map.get("select");
+ 	  				Select select = (Select)map.get("select");
  	  				
  	  				String cname = course.getCname();
  	  				String cnum = course.getCnum();
@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	  				String tname = teacher.getTname();
  	  				int cterm = open.getCterm();
  	  				String realTerm = open.getRealTerm();
- 	  				//Long open_id = course.getOpen_id();
+ 	  				Long open_id = select.getOpen_id();
  			%>
   					<div style="width:250px;margin-left: 50px;float:left;text-align: center;">
   						<fieldset class="layui-elem-field">
@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  								</div>
   								<br>
   								<form action="course" method="post">
-  									<%-- <input type="hidden" name = "openid" value="<%= open_id %>"> --%>
+  									<input type="hidden" name = "openid" value="<%= open_id %>">
   									<input type="hidden" name = "coursenum" value="<%= cnum %>">
 	  								<%
 	  									if(cterm < nterm){
