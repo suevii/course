@@ -25,26 +25,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<%
 				if(session.getAttribute("coursenum") != null)	
 					session.removeAttribute("coursenum");
-					UserTable user = (UserTable)session.getAttribute("user");
-  				String id = user.getId();
-  				Semester sem = new Semester();
-  				int nterm = sem.getTerm();
-  				ArrayList al = DB.getStudentCourse(id);
-  				Iterator iter = al.iterator();
- 	  			while(iter.hasNext()){
- 	  				HashMap<String, Object> map = (HashMap)iter.next();
- 	  				Course course = (Course)map.get("course");
- 	  				Teacher teacher = (Teacher)map.get("teacher");
- 	  				Open open = (Open)map.get("open");
- 	  				//Select select = (Select)map.get("select");
- 	  				
- 	  				String cname = course.getCname();
- 	  				String cnum = course.getCnum();
- 	  				String tnum = teacher.getTnum();
- 	  				String tname = teacher.getTname();
- 	  				int cterm = open.getCterm();
- 	  				String realTerm = open.getRealTerm();
- 	  				//Long open_id = course.getOpen_id();
+				UserTable user = (UserTable)session.getAttribute("user");
+ 				String id = user.getId();
+ 				Semester sem = new Semester();
+ 				int nterm = sem.getTerm();
+ 				ArrayList al = DB.getStudentCourse(id);
+ 				Iterator iter = al.iterator();
+  			while(iter.hasNext()){
+  				HashMap<String, Object> map = (HashMap)iter.next();
+  				Course course = (Course)map.get("course");
+  				Teacher teacher = (Teacher)map.get("teacher");
+  				Open open = (Open)map.get("open");
+  				Select select = (Select)map.get("select");
+  				
+  				String cname = course.getCname();
+  				String cnum = course.getCnum();
+  				String tnum = teacher.getTnum();
+  				String tname = teacher.getTname();
+  				int cterm = open.getCterm();
+  				String realTerm = open.getRealTerm();
+  				Long open_id = select.getOpen_id();
  			%>
   					<div style="width:250px;margin-left: 50px;float:left;text-align: center;">
   						<fieldset class="layui-elem-field">
@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  								</div>
   								<br>
   								<form action="course" method="post">
-  									<%-- <input type="hidden" name = "openid" value="<%= open_id %>"> --%>
+  									<input type="hidden" name = "openid" value="<%= open_id %>"> 
   									<input type="hidden" name = "coursenum" value="<%= cnum %>">
 	  								<%
 	  									if(cterm < nterm){

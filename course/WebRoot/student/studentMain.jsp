@@ -9,11 +9,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<base href="<%=basePath%>">
 		<meta charset="UTF-8">
 		<title>课程管理系统</title>
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="This is my page">
 		<link rel="stylesheet" href="/course/layui/css/layui.css">
 		<link rel="stylesheet" href="/course/css/index.css">
 </head>
@@ -21,18 +16,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="layui-layout layui-layout-admin">
 			<jsp:include page="/student/head.jsp"/>
 			<jsp:include page="/student/left.jsp"/>
-		<%UserTable user = (UserTable)session.getAttribute("user");
-			String name = user.getUsername(); %>
-		<div class="layui-body site-demo" style="margin-top: 30px;">
-			<fieldset class="layui-elem-field layui-field-title">
-	  			<legend><%=name %>，欢迎你登录课程项目管理系统！</legend>
-			</fieldset>
-			<blockquote class="layui-elem-quote">温馨提示：现在是2016-2017学年秋季学期。<br>您的身份是：学生。</blockquote>
-			<br>
-			
-		</div>
-		<script src="/course/layui/layui.js"></script>
-		<script src="/course/layui/lay/dest/layui.all.js"></script>  
+			<%
+				UserTable user = (UserTable)session.getAttribute("user");
+				String name = user.getUsername(); 
+			%>
+			<div class="layui-body site-demo" style="margin-top: 30px;">
+				<fieldset class="layui-elem-field layui-field-title">
+		  			<legend><%=name %>，欢迎你登录课程项目管理系统！</legend>
+				</fieldset>
+				<blockquote class="layui-elem-quote">
+					温馨提示：现在是2016-2017学年秋季学期。<br>
+					您的身份是：学生。
+				</blockquote>
+				热门课程展示
+				<br>
+			</div>
 	</div>
 </body>
+		<script src="/course/layui/layui.js"></script>
+		<script src="/course/layui/lay/dest/layui.all.js"></script>  
 </html>
