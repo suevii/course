@@ -46,6 +46,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <script type="text/javascript" src="/course/jquery-1.7.2/jquery-3.2.0.min.js"></script>
   <script src="/course/layui/layui.js"></script>
   <script src="/course/layui/lay/dest/layui.all.js"></script>
-
+</div>
 </body>
 </html>
