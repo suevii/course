@@ -38,9 +38,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		    db.deleteMailInfo(a); 	
   		    response.setHeader("Refresh","0;URL=/course/mail/mail_receive.jsp");  		
   		%>
-
+			
   		</table>
-  		 <tr>删除成功</tr>
+  		 删除成功
   	</form>
 </body>
 </html>

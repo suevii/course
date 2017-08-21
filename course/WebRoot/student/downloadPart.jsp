@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,model.*,java.sql.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,model.*,java.sql.*,db.DB" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ page language="java" import="com.opensymphony.xwork2.ActionContext" %>
 <jsp:useBean id="MySQLDB" class="db.DB"></jsp:useBean>
@@ -11,26 +11,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    <title>文件下载</title>
-    
-		<link rel="stylesheet" type="text/css" href="/course/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/course/css/bootstrap-table.css">
+    <title>文件下载</title> 
+	<link rel="stylesheet" type="text/css" href="/course/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/course/css/bootstrap-table.css">
   </head>
   
   <body>
+
    	<div class="panel panel-default" style="margin:30px;">
+   	
+   		
 			<div class="panel-heading">
 				<h2 class="panel-title">文件下载</h2>
 			</div>
-			<!-- <div class="panel panel-body"> -->
-				<table class="table table-striped table-bordered table-hover" style="text-align:center">
+			<div class="layui-form">
+				<table class="layui-table" lay-skin="line"style="text-align:center">
 					<thead>
 						<tr>
 							<th style="text-align:center">文件名称</th>
-	            <th style="text-align:center">上传时间</th>
-	            <th style="text-align:center">操作</th>
-		        </tr>
-	       	</thead>
+				            <th style="text-align:center">上传时间</th>
+				            <th style="text-align:center">操作</th>
+				        </tr>
+	       		   </thead>
 	        <%
 	        	UserTable user = (UserTable)session.getAttribute("user");	//student
 	        	String userId = user.getId();
@@ -59,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  					<td><input type="hidden" name="file.name" value="<%= fileName %>"><%= fileName %></td>
 		  					<td><input type="hidden" name="" value="<%= date %>"><%= date %></td>
 		  					<td>
-		  						<a class="btn btn-info" type="submit" href="download?file_id=<%= file_id %>&fileName=<%= fileName %>">下载</a>
+		  						<a class="layui-btn layui-btn-mini layui-btn-normal" type="submit" href="download?file_id=<%= file_id %>&fileName=<%= fileName %>">下载</a>
 								</td>
 		  				</tr>
 							</form>

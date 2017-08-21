@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		%>
 
   		</table>
-  		 <tr>删除成功</tr>
+  		 删除成功
   	</form>
 </body>
 </html>

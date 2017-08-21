@@ -95,19 +95,18 @@ public class DB {
 		try {
 
 			pstmt = conn.prepareStatement(
-					"select * from open,course where tnum=? and open.cnum=course.cnum ORDER BY term DESC");
+					"select * from open,course where tNum=? and open.cNum=course.cNum ORDER BY cTerm DESC");
 			pstmt.setString(1, tnum);
-
 			ArrayList al = new ArrayList();
 
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				OpenCourse course = new OpenCourse();
 				course.setOpen_id(rs.getLong("open_id"));
-				course.setCnum(rs.getString("open.cnum"));
-				course.setCname(rs.getString("course.cname"));
-				course.setTnum(rs.getString("tnum"));
-				course.setTerm(rs.getInt("term"));
+				course.setCnum(rs.getString("cNum"));
+				course.setCname(rs.getString("cName"));
+				course.setTnum(rs.getString("tNum"));
+				course.setTerm(rs.getInt("cTerm"));
 				al.add(course);
 			}
 			return al;
@@ -136,12 +135,16 @@ public class DB {
 				teacher.setTnum(rs.getString("tNum"));
 				teacher.setTname(rs.getString("tName"));
 				Open open = new Open();
-				open.setCterm(rs.getInt("cTerm"));
+				open.setCterm(rs.getInt("cTerm"));     
 				Select select = new Select();
 				select.setOpen_id(rs.getLong("open_id"));
+<<<<<<< HEAD
 				
 //				course.setSnum(rs.getString("sNum"));
 //				course.setOpen_id(rs.getLong("s.open_id"));
+=======
+
+>>>>>>> 3c4907571d76d550f38f4148a0c623471665fdd7
 				map.put("course", course);
 				map.put("teacher", teacher);
 				map.put("open", open);
