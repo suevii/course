@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql
-Source Server Version : 80000
+Source Server         : 我的连接
+Source Server Version : 50718
 Source Host           : localhost:3306
 Source Database       : course_manage
 
 Target Server Type    : MYSQL
-Target Server Version : 80000
+Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2017-08-22 16:23:55
+Date: 2017-08-22 22:33:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -170,7 +170,7 @@ CREATE TABLE `open` (
   KEY `cNum` (`cNum`),
   KEY `tNum` (`tNum`),
   CONSTRAINT `cNum` FOREIGN KEY (`cNum`) REFERENCES `course` (`cNum`),
-  CONSTRAINT `tNum` FOREIGN KEY (`tNum`) REFERENCES `teacher` (`tnum`)
+  CONSTRAINT `tNum` FOREIGN KEY (`tNum`) REFERENCES `teacher` (`tNum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='cTime 三5-6\r\ncTerm 2017-2018秋';
 
 -- ----------------------------
@@ -201,28 +201,28 @@ CREATE TABLE `select` (
   PRIMARY KEY (`open_id`,`sNum`),
   KEY `sNum` (`sNum`),
   CONSTRAINT `open_id` FOREIGN KEY (`open_id`) REFERENCES `open` (`open_id`),
-  CONSTRAINT `sNum` FOREIGN KEY (`sNum`) REFERENCES `student` (`snum`)
+  CONSTRAINT `sNum` FOREIGN KEY (`sNum`) REFERENCES `student` (`sNum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of select
 -- ----------------------------
-INSERT INTO `select` VALUES ('1', '14120926', null);
-INSERT INTO `select` VALUES ('1', '14121980', null);
+INSERT INTO `select` VALUES ('1', '14120926', '84');
+INSERT INTO `select` VALUES ('1', '14121980', '84');
 INSERT INTO `select` VALUES ('2', '14120000', null);
-INSERT INTO `select` VALUES ('3', '14120926', null);
-INSERT INTO `select` VALUES ('3', '14121980', null);
+INSERT INTO `select` VALUES ('3', '14120926', '79');
+INSERT INTO `select` VALUES ('3', '14121980', '74');
 INSERT INTO `select` VALUES ('4', '14120000', null);
-INSERT INTO `select` VALUES ('5', '14120926', null);
-INSERT INTO `select` VALUES ('5', '14121980', null);
+INSERT INTO `select` VALUES ('5', '14120926', '84');
+INSERT INTO `select` VALUES ('5', '14121980', '85');
 INSERT INTO `select` VALUES ('6', '14120000', null);
-INSERT INTO `select` VALUES ('8', '14120926', null);
-INSERT INTO `select` VALUES ('9', '14121980', null);
-INSERT INTO `select` VALUES ('10', '14120926', null);
-INSERT INTO `select` VALUES ('10', '14121980', null);
+INSERT INTO `select` VALUES ('8', '14120926', '89');
+INSERT INTO `select` VALUES ('9', '14121980', '85');
+INSERT INTO `select` VALUES ('10', '14120926', '87');
+INSERT INTO `select` VALUES ('10', '14121980', '88');
 INSERT INTO `select` VALUES ('11', '14120000', null);
-INSERT INTO `select` VALUES ('12', '14120926', null);
-INSERT INTO `select` VALUES ('12', '14121980', null);
+INSERT INTO `select` VALUES ('12', '14120926', '84');
+INSERT INTO `select` VALUES ('12', '14121980', '85');
 INSERT INTO `select` VALUES ('13', '14120000', null);
 
 -- ----------------------------
