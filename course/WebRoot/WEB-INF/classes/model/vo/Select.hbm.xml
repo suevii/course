@@ -14,5 +14,8 @@
                 <column name="sNum" length="10" />
             </key-many-to-one>
         </composite-id>
+        <property name="grade" type="java.lang.Integer">
+            <column name="grade" />
+        </property>
     </class>
 </hibernate-mapping>

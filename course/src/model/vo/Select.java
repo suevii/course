@@ -7,10 +7,9 @@ package model.vo;
 public class Select implements java.io.Serializable {
 
 	// Fields
-	private Long open_id;
-	
 
 	private SelectId id;
+	private Integer grade;
 
 	// Constructors
 
@@ -18,27 +17,33 @@ public class Select implements java.io.Serializable {
 	public Select() {
 	}
 
-	/** full constructor */
+	/** minimal constructor */
 	public Select(SelectId id) {
 		this.id = id;
 	}
 
+	/** full constructor */
+	public Select(SelectId id, Integer grade) {
+		this.id = id;
+		this.grade = grade;
+	}
+
 	// Property accessors
 
-	public Long getOpen_id() {
-		return open_id;
-	}
-
-	public void setOpen_id(Long open_id) {
-		this.open_id = open_id;
-	}
-	
 	public SelectId getId() {
 		return this.id;
 	}
 
 	public void setId(SelectId id) {
 		this.id = id;
+	}
+
+	public Integer getGrade() {
+		return this.grade;
+	}
+
+	public void setGrade(Integer grade) {
+		this.grade = grade;
 	}
 
 }

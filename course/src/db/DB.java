@@ -26,6 +26,8 @@ import model.UserTable;
 import model.vo.Course;
 import model.vo.Open;
 import model.vo.Select;
+import model.vo.SelectId;
+import model.vo.Student;
 import model.vo.Teacher;
 public class DB {
 	private String DBname = "course_manage";
@@ -93,13 +95,14 @@ public class DB {
 
 	public ArrayList getTeacherCourse(String tnum) {// 获取老师的课程
 		try {
-
+			ArrayList al = new ArrayList();
+//			Teacher teacher = new Teacher();
+//			teacher.setTnum(tnum);
 			pstmt = conn.prepareStatement(
 					"select * from open,course where tNum=? and open.cNum=course.cNum ORDER BY cTerm DESC");
 			pstmt.setString(1, tnum);
-			ArrayList al = new ArrayList();
-
 			ResultSet rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
 				OpenCourse course = new OpenCourse();
 				course.setOpen_id(rs.getLong("open_id"));
@@ -119,6 +122,8 @@ public class DB {
 	public ArrayList getStudentCourse(String snum) {// 获取学生的课程
 		try {
 			ArrayList al = new ArrayList();
+			Student student = new Student();
+			student.setSnum(snum);
 			pstmt = conn.prepareStatement(
 					"SELECT s.open_id, s.sNum, c.cNum, t.tNum, c.cName, t.tName, o.cTerm "
 					+ "FROM `select` s,teacher t, course c, open o "
@@ -137,7 +142,9 @@ public class DB {
 				Open open = new Open();
 				open.setCterm(rs.getInt("cTerm"));     
 				Select select = new Select();
-				select.setOpen_id(rs.getLong("open_id"));
+				SelectId selectId = new SelectId(open, student);
+				select.setId(selectId);
+				//select.setOpen_id(rs.getLong("open_id"));
 				map.put("course", course);
 				map.put("teacher", teacher);
 				map.put("open", open);

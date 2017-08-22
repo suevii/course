@@ -49,7 +49,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				String tname = teacher.getTname();
   				int cterm = open.getCterm();
   				String realTerm = open.getRealTerm();
-  				Long open_id = select.getOpen_id();
+  				//Long open_id = select.getOpen_id();
+  				Long open_id = select.getId().getOpen().getOpenId();
  			%>
   					<div style="width:250px;margin-left: 50px;float:left;text-align: center;">
   						<fieldset class="layui-elem-field">
