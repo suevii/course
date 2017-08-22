@@ -16,6 +16,21 @@
         <property name="pwd" type="java.lang.String">
             <column name="pwd" length="20" />
         </property>
+        <property name="tsex" type="java.lang.String">
+            <column name="tSex" length="5" />
+        </property>
+        <property name="tdegree" type="java.lang.String">
+            <column name="tDegree" length="20" />
+        </property>
+        <property name="tdept" type="java.lang.String">
+            <column name="tDept" length="20" />
+        </property>
+        <property name="ttitle" type="java.lang.String">
+            <column name="tTitle" length="20" />
+        </property>
+        <property name="tinfo" type="java.lang.String">
+            <column name="tInfo" length="500" />
+        </property>
         <set name="opens" inverse="true">
             <key>
                 <column name="tNum" length="10" not-null="true" />

@@ -10,11 +10,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<base href="<%=basePath%>">
 		<meta charset="UTF-8">
 		<title>课程管理系统</title>
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="This is my page">
 		<link rel="stylesheet" href="/course/layui/css/layui.css">
 		<link rel="stylesheet" href="/course/css/index.css">
 </head>
@@ -49,7 +44,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				String tname = teacher.getTname();
   				int cterm = open.getCterm();
   				String realTerm = open.getRealTerm();
-  				Long open_id = select.getOpen_id();
+  				//Long open_id = select.getOpen_id();
+  				Long open_id = select.getId().getOpen().getOpenId();
  			%>
   					<div style="width:250px;margin-left: 50px;float:left;text-align: center;">
   						<fieldset class="layui-elem-field">
