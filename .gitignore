@@ -48,3 +48,6 @@ Temporary Items
 *.class
 *.class
 *.class
+course/WebRoot/WEB-INF/classes/db/DB.class
+course/WebRoot/WEB-INF/classes/model/vo/Select.class
+course/WebRoot/WEB-INF/classes/model/vo/Teacher.class

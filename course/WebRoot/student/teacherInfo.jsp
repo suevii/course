@@ -1,11 +1,11 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,model.vo.*,db.DB,java.sql.*" pageEncoding="UTF-8"%>
 <%@taglib uri="/struts-tags" prefix="s"%>
+<jsp:useBean id="DB" scope="page" class = "db.DB" />
 <%
 String path = request.getRequestURI();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
 %>
-<%@page import="db.DB"%>
-<%-- <%@page import="model.InfoTable" %> --%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,13 +36,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="layui-inline">
 				<label class="layui-form-label">教师号</label>
 			    <div class="layui-input-inline">
-			    	<input type="text" name="tnum" class="layui-input">
+			    	<input type="text" name="number" class="layui-input">
 			    </div>
 			</div>
 			<div class="layui-inline">
 				<label class="layui-form-label">教师名</label>
 			    <div class="layui-input-inline">
-			    	<input type="text" name="tname" class="layui-input">
+			    	<input type="text" name="name" class="layui-input">
 			    </div>
 			    <div class="layui-inline">
 					<div class="layui-input-block">
@@ -54,42 +54,92 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		
 	</form>
- 		
+ 	<%
+	 	if(request.getParameter("number") != null || request.getParameter("name") != null){
+			String tnum = request.getParameter("number");
+			String tname = new String(request.getParameter("name").getBytes("iso8859-1"),"utf-8");
+	 		String sql = "SELECT * FROM teacher WHERE tNum LIKE '"+ tnum + "' OR tName LIKE '" + tname +"'";
+			ResultSet rs = DB.executeQuery(sql);
+			Teacher tinfo = new Teacher();
+			while (rs.next()) {
+				tinfo.setTname(rs.getString("tName"));
+				tinfo.setTnum(rs.getString("tNum"));
+				tinfo.setTsex(rs.getString("tSex"));
+				tinfo.setTdegree(rs.getString("tDegree"));
+				tinfo.setTdept(rs.getString("tDept"));
+				tinfo.setTtitle(rs.getString("tTitle"));
+				tinfo.setTinfo(rs.getString("tInfo"));
+ 	%>
  		
 		<table border="1" class="layui-table" lay-even lay-skin="line">
-			<colgroup>
-    			<col width="80">
-    			<col>
-    			<col width="80">
-    			<col>
- 			 </colgroup>
  			  <thead>
 			  	<tr>
-			    	<th colspan="4">宋安平教师信息</th>
+			    	<th colspan="4"><%=tinfo.getTname()%>教师信息</th>
 			  	</tr> 
 			  </thead>
   		<tbody>
 			<tr>
-				<td>姓名</td><td>宋安平</td>
-				<td>性别</td><td>男</td>
+				<td>姓名</td><td><%=tinfo.getTname()%></td>
+				<td>性别</td><td><%=tinfo.getTsex()%></td>
 			</tr>
 			<tr>
-				<td>工号</td><td>10000002</td>
-				<td>学院</td><td>计算机工程与技术学院</td>
+				<td>工号</td><td><%=tinfo.getTnum()%></td>
+				<td>学院</td><td><%=tinfo.getTdept()%></td>
 			</tr>
 			<tr>
-				<td>学位</td><td>博士</td>
-				<td>职称</td><td>副教授</td>
+				<td>学位</td><td><%=tinfo.getTdegree()%></td>
+				<td>职称</td><td><%=tinfo.getTtitle()%></td>
 			</tr>
 			<tr>
 				<td colspan="4">个人简介</td>
 			</tr>
 			<tr>
-				<td colspan="4">这里是一些个人简介。</td>
+				<td colspan="4"><%=tinfo.getTinfo()%></td>
 			</tr>
   		</tbody>
 		</table>
-		
+
+		<table border="1" class="layui-table" lay-even lay-skin="line">
+ 			  <thead>
+			  	<tr>
+			    	<th colspan="5">开设课程</th>
+			  	</tr> 
+			  	
+			  </thead>
+  		<tbody>
+  			<tr>
+				<th>课程号</th>
+				<th>课程名</th>
+			    <th>学分</th>
+			    <th>学期</th>
+			    <th>上课时间</th>
+			</tr> 
+ 	<%
+		String csql = "SELECT * FROM `open` o, course c WHERE o.cNum = c.cNum AND o.tNum = '" + tinfo.getTnum() +"'";
+		ResultSet crs = DB.executeQuery(csql);
+		while(crs.next()){
+			Open open = new Open();
+			open.setCterm(crs.getInt("cTerm"));
+			
+	%>
+			<tr>
+				<td><%=crs.getString("cNum") %></td>
+
+				<td><%=crs.getString("cName") %></td>
+
+				<td><%=crs.getInt("credit") %></td>
+
+				<td><%=open.getRealTerm() %></td>
+				<td><%=crs.getString("cTime") %></td>
+			</tr>		
+	<%
+		}
+	%>
+  		</tbody>
+  		</table>
+		<%
+		}
+	}%>
 		
 		
 		</div>

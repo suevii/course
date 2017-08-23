@@ -270,7 +270,7 @@ public class DB {
 		}
 	}
 
-	public ArrayList getAllHomework(String snum,String date) {// 获取学生的作业通知
+	public ArrayList getAllHomework(String snum,String date) {// 获取所有作业通知
 		try {
 
 			pstmt = conn.prepareStatement("SELECT * from homework h WHERE h.open_id IN(select s.open_id from `select` s where s.snum=?  )  and unix_timestamp(h.deadline)>unix_timestamp(?) ORDER BY h.out_time DESC;");
