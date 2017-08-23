@@ -14,8 +14,19 @@
       <param-value>com.mycompany.myapp.actions</param-value>
     </init-param>
   </filter>
-  <filter-mapping>
-    <filter-name>struts2</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+<filter-mapping>  
+    <filter-name>struts2</filter-name>  
+    <url-pattern>*.do</url-pattern>  
+</filter-mapping>  
+<filter-mapping>  
+    <filter-name>struts2</filter-name>  
+    <url-pattern>*.action</url-pattern>  
+</filter-mapping>  
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
 </web-app>
