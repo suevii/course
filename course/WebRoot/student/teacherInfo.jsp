@@ -12,11 +12,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<base href="<%=basePath%>">
 		<meta charset="UTF-8">
 		<title>课程管理系统</title>
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="This is my page">
 		<link rel="stylesheet" href="/courese/layui/css/layui.css">
 		<link rel="stylesheet" href="/course/css/index.css">
 </head>
@@ -31,52 +26,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<legend>教师查询</legend>
 		</fieldset>  
 		
- 	<form class="layui-form" action="">
-		<div class="layui-form-item">
-			<div class="layui-inline">
-				<label class="layui-form-label">教师号</label>
+	 	<form class="layui-form" action="">
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">教师号</label>
 			    <div class="layui-input-inline">
 			    	<input type="text" name="number" class="layui-input">
 			    </div>
-			</div>
-			<div class="layui-inline">
-				<label class="layui-form-label">教师名</label>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">教师名</label>
 			    <div class="layui-input-inline">
 			    	<input type="text" name="name" class="layui-input">
 			    </div>
 			    <div class="layui-inline">
-					<div class="layui-input-block">
-						<button class="layui-btn" lay-submit="" lay-filter="demo1">查询</button>
+						<div class="layui-input-block">
+							<button class="layui-btn" lay-submit="" lay-filter="demo1">查询</button>
+						</div>
 					</div>
 				</div>
 			</div>
-			
-		</div>
-		
-	</form>
- 	<%
-	 	if(request.getParameter("number") != null || request.getParameter("name") != null){
-			String tnum = request.getParameter("number");
-			String tname = new String(request.getParameter("name").getBytes("iso8859-1"),"utf-8");
-	 		String sql = "SELECT * FROM teacher WHERE tNum LIKE '"+ tnum + "' OR tName LIKE '" + tname +"'";
-			ResultSet rs = DB.executeQuery(sql);
-			Teacher tinfo = new Teacher();
-			while (rs.next()) {
-				tinfo.setTname(rs.getString("tName"));
-				tinfo.setTnum(rs.getString("tNum"));
-				tinfo.setTsex(rs.getString("tSex"));
-				tinfo.setTdegree(rs.getString("tDegree"));
-				tinfo.setTdept(rs.getString("tDept"));
-				tinfo.setTtitle(rs.getString("tTitle"));
-				tinfo.setTinfo(rs.getString("tInfo"));
- 	%>
+		</form>
+	 	<%
+		 	if(request.getParameter("number") != null || request.getParameter("name") != null){
+				String tnum = request.getParameter("number");
+				String tname = new String(request.getParameter("name").getBytes("iso8859-1"),"utf-8");
+		 		String sql = "SELECT * FROM teacher WHERE tNum LIKE '"+ tnum + "' OR tName LIKE '" + tname +"'";
+				ResultSet rs = DB.executeQuery(sql);
+				Teacher tinfo = new Teacher();
+				while (rs.next()) {
+					tinfo.setTname(rs.getString("tName"));
+					tinfo.setTnum(rs.getString("tNum"));
+					tinfo.setTsex(rs.getString("tSex"));
+					tinfo.setTdegree(rs.getString("tDegree"));
+					tinfo.setTdept(rs.getString("tDept"));
+					tinfo.setTtitle(rs.getString("tTitle"));
+					tinfo.setTinfo(rs.getString("tInfo"));
+	 	%>
  		
 		<table border="1" class="layui-table" lay-even lay-skin="line">
- 			  <thead>
-			  	<tr>
-			    	<th colspan="4"><%=tinfo.getTname()%>教师信息</th>
-			  	</tr> 
-			  </thead>
+		  <thead>
+		  	<tr>
+		    	<th colspan="4"><%=tinfo.getTname()%>教师信息</th>
+		  	</tr> 
+		  </thead>
   		<tbody>
 			<tr>
 				<td>姓名</td><td><%=tinfo.getTname()%></td>
