@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.opensymphony.xwork2.ActionContext;
 
 import db.DB;
@@ -22,21 +23,21 @@ import model.UserTable;
 
 @RestController
 @RequestMapping("/user")
-public class user {
+public class User {
 	
 	@Autowired
 	DB db=new DB();
 	
-	@RequestMapping(value="/login",method=RequestMethod.POST)
+	@RequestMapping(value="/login",method=RequestMethod.POST,consumes="application/json")
 	public ResponseEntity<UserTable> login(@RequestBody UserTable user){
 		String character = user.getCharacter();
 		String usr = user.getUsername();
 		String pwd = user.getPassword();
 		boolean validated = false;
 		DB usrdb = new DB();
-		ActionContext context = ActionContext.getContext();
-		Map session = context.getSession();
-		UserTable user1 = (UserTable)session.get("user");
+//		ActionContext context = ActionContext.getContext();
+//		Map session = context.getSession();
+		UserTable user1 = null;//(UserTable)session.get("user");
 		String sql = null,idcmp = null,next = null;
 		int level = -1;
 		if(character.equals("student")){
@@ -61,7 +62,7 @@ public class user {
 						user1.setUsername(rs.getString(2));
 						user1.setPassword(rs.getString(3));
 						user1.setLevel(level);
-						session.put("user", user1);
+						//session.put("user", user1);
 						validated = true;
 					}
 				}
