@@ -140,11 +140,11 @@ public class DB {
 				teacher.setTnum(rs.getString("tNum"));
 				teacher.setTname(rs.getString("tName"));
 				Open open = new Open();
+				open.setOpenId(rs.getLong("open_id"));
 				open.setCterm(rs.getInt("cTerm"));     
 				Select select = new Select();
 				SelectId selectId = new SelectId(open, student);
 				select.setId(selectId);
-				//select.setOpen_id(rs.getLong("open_id"));
 				map.put("course", course);
 				map.put("teacher", teacher);
 				map.put("open", open);

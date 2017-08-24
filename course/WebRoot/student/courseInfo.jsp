@@ -43,14 +43,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    	<input type="text" name="tNum" class="layui-input">
 				    </div>
 				  </div>
-			    <div class="layui-inline">
-						<div class="layui-input-block">
-							<button class="layui-btn" lay-submit="" lay-filter="demo1">查询</button>
-						</div>
+				  <div class="layui-inline">
+						<label class="layui-form-label">教师名</label>
+				    <div class="layui-input-inline">
+				    	<input type="text" name="tName" class="layui-input">
+				    </div>
 					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">学分数</label>
+				    <div class="layui-input-inline">
+				    	<input type="text" name="credit" class="layui-input">
+				    </div>
+					</div>
+			    
 				</div>
-			</form>
-			<div class="panel panel-default" style="margin:30px;">
+				<div class="layui-form-item">
+			    <div class="layui-input-block">
+			      <button class="layui-btn" lay-submit lay-filter="formDemo">查询</button>
+			      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+			    </div>
+			  </div>
+		  </form>
+ 			<div class="panel panel-default" style="margin:30px;">
 				<div class="panel-heading">
 					<h2 class="panel-title">课程信息</h2>
 				</div>
@@ -72,34 +86,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							String cNum = request.getParameter("cNum");
 							String cName = new String(request.getParameter("cName").getBytes("iso8859-1"),"utf-8");
 							String tNum = request.getParameter("tNum");
+							String tName = new String(request.getParameter("tName").getBytes("iso8859-1"),"utf-8");
+							int credit = 0;
+							if(request.getParameter("credit") == null || request.getParameter("credit") == "");
+							else
+								credit = Integer.parseInt(request.getParameter("credit"));
 					 		String sql = "select * from course C, open O, teacher T "
-					 								+	"where (O.cNum like '" + cNum 
-					 								+ "' or C.cName like '" + cName 
-					 								+ "' or O.tNum like '" + tNum + "')"
+					 								+	"where (O.cNum = '" + cNum 
+					 								+ "' or C.cName = '" + cName 
+					 								+ "' or O.tNum = '" + tNum
+					 								+ "' or T.tName = '" + tName 
+					 								+ "' or C.credit = " + credit + ")"
 					 								+ " and T.tNum=O.tNum and C.cNum=O.cNum";
 							ResultSet rs = DB.executeQuery(sql);
 							Course c = new Course();
 							Teacher t = new Teacher();
 							Open o = new Open();
-							while (rs.next()) {
-								c.setCnum(rs.getString("C.cNum"));
-								c.setCname(rs.getString("C.cName"));
-								c.setCredit(rs.getInt("credit"));
-								t.setTnum(rs.getString("T.tNum"));
-								t.setTname(rs.getString("T.tName"));
-								o.setCtime(rs.getString("O.cTime"));
-								o.setCterm(rs.getInt("O.cTerm"));
-				 	%>
-						<tr>
-							<td><%= c.getCnum() %></td>
-							<td><%= c.getCname() %></td>
-							<td><%= c.getCredit() %></td>
-							<td><%= t.getTnum() %></td>
-							<td><%= t.getTname() %></td>
-							<td><%= o.getCtime() %></td>
-							<td><%= o.getRealTerm() %></td>
-						</tr>
-		  		<%
+							if(!rs.next()){
+						%>
+								<tr style="text-align: center;">查不到(・ω・)凸</tr>
+						<%
+							}else{
+								while (rs.next()) {
+									c.setCnum(rs.getString("C.cNum"));
+									c.setCname(rs.getString("C.cName"));
+									c.setCredit(rs.getInt("credit"));
+									t.setTnum(rs.getString("T.tNum"));
+									t.setTname(rs.getString("T.tName"));
+									o.setCtime(rs.getString("O.cTime"));
+									o.setCterm(rs.getInt("O.cTerm"));
+					 	%>
+							<tr>
+								<td><%= c.getCnum() %></td>
+								<td><%= c.getCname() %></td>
+								<td><%= c.getCredit() %></td>
+								<td><%= t.getTnum() %></td>
+								<td><%= t.getTname() %></td>
+								<td><%= o.getCtime() %></td>
+								<td><%= o.getRealTerm() %></td>
+							</tr>
+			  		<%
+								}
 							}
 						}
 					%>
