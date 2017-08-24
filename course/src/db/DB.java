@@ -140,7 +140,8 @@ public class DB {
 				teacher.setTnum(rs.getString("tNum"));
 				teacher.setTname(rs.getString("tName"));
 				Open open = new Open();
-				open.setCterm(rs.getInt("cTerm"));     
+				open.setCterm(rs.getInt("cTerm"));
+				open.setOpenId(rs.getLong("open_id"));
 				Select select = new Select();
 				SelectId selectId = new SelectId(open, student);
 				select.setId(selectId);

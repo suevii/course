@@ -26,10 +26,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<dd><a href="/course/student/course.jsp">我的课程</a></dd>
 							</dl>
 							<dl class="layui-nav-child">
+								<dd><a href="">成绩查询</a></dd>
+							</dl>
+
+						</li>
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="javascript:;" href="javascript:;">信息平台</a>
+							<dl class="layui-nav-child">
 								<dd><a href="/course/student/teacherInfo.jsp">教师查询</a></dd>
 							</dl>
 							<dl class="layui-nav-child">
 								<dd><a href="/course/student/courseInfo.jsp">课程查询</a></dd>
+							</dl>
+							<dl class="layui-nav-child">
+								<dd><a href="">专业课比较</a></dd>
+							</dl>
+							<dl class="layui-nav-child">
+								<dd><a href="">基础课比较</a></dd>
 							</dl>
 						</li>
 						<li class="layui-nav-item layui-nav-itemed">
