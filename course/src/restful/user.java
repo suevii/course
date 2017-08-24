@@ -1,4 +1,4 @@
-package action;
+package restful;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,19 +7,29 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 
 import db.DB;
 import model.UserTable;
 
-public class LoginAction extends ActionSupport{
-	private UserTable user;
-	String message="用户名或密码错误";
-	public String execute() throws Exception{
-		HttpServletRequest request = ServletActionContext.getRequest();
-		String character = request.getParameter("character");
+@RestController
+@RequestMapping("/user")
+public class user {
+	
+	@Autowired
+	DB db=new DB();
+	
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public ResponseEntity<UserTable> login(@RequestBody UserTable user){
+		String character = user.getCharacter();
 		String usr = user.getUsername();
 		String pwd = user.getPassword();
 		boolean validated = false;
@@ -65,15 +75,16 @@ public class LoginAction extends ActionSupport{
 			validated = true;
 		}
 		if(validated){
-			return next;
+			return new ResponseEntity<UserTable>(user1,HttpStatus.OK);
 		}
 		else{
-			 request.setAttribute("tipMessage", message);
-			 return "login";
+			 //request.setAttribute("tipMessage", message);
+			 return new ResponseEntity<UserTable>(user1,HttpStatus.NOT_FOUND);
 //			return "error";
 			
 		}
 	}
-
+	
+	
+	
 }
-

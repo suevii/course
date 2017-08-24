@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
 
 import factory.HibernateSessionFactory;
 import model.Homework;
@@ -29,6 +30,8 @@ import model.vo.Select;
 import model.vo.SelectId;
 import model.vo.Student;
 import model.vo.Teacher;
+
+@Component
 public class DB {
 	private String DBname = "course_manage";
 	private String DBuser = "course";

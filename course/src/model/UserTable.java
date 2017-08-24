@@ -5,6 +5,7 @@ public class UserTable  implements Comparable<UserTable>{
 	private String username;
 	private String password;
 	private int level;//学生level = 0，教师level=1
+	private String character;
 	public String getId(){
 		return this.id;
 	}
@@ -32,6 +33,12 @@ public class UserTable  implements Comparable<UserTable>{
 	public int compareTo(UserTable o) {
 		String id=o.getId();
 		return this.id.compareTo(id);
+	}
+	public String getCharacter() {
+		return character;
+	}
+	public void setCharacter(String character) {
+		this.character = character;
 	}
 	
 }
