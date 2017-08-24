@@ -26,8 +26,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  			<legend><%=name %>，欢迎你登录课程项目管理系统！</legend>
 				</fieldset>
 				<blockquote class="layui-elem-quote">
-					温馨提示：现在是2016-2017学年秋季学期。<br>
+					温馨提示：现在是2016-2017学年春季学期。<br>
 					您的身份是：学生。
+					
 				</blockquote>
 				<div class="panel panel-default" style="margin:30px;">
 					<div class="panel-heading">

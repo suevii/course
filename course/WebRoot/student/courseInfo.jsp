@@ -22,6 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  		<div class="layui-body site-demo">
 	 		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
 	  			<legend>课程查询</legend>
+	  			
 			</fieldset>  
 			<form class="layui-form" action="">
 				<div class="layui-form-item">
