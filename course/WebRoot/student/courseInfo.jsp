@@ -9,11 +9,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-		<base href="<%=basePath%>">
-		<meta charset="UTF-8">
-		<title>课程管理系统</title>
-		<link rel="stylesheet" href="/courese/layui/css/layui.css">
-		<link rel="stylesheet" href="/course/css/index.css">
+	<base href="<%=basePath%>">
+	<meta charset="UTF-8">
+	<title>课程管理系统</title>
+	<link rel="stylesheet" href="/courese/layui/css/layui.css">
+	<link rel="stylesheet" href="/course/css/index.css">
 </head>
 <body>
 	<div class="layui-layout layui-layout-admin">
@@ -69,16 +69,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="panel-heading">
 					<h2 class="panel-title">课程信息</h2>
 				</div>
-				<table border="1" class="layui-table" lay-even lay-skin="line">
+				<table border="1" class="layui-table" lay-skin="line" style="text-align:center">
 	 			  <thead>
-				  	<tr>
-				    	<th>课程号</th>
-				    	<th>课程名</th>
-				    	<th>学分</th>
-				    	<th>教师号</th>
-				    	<th>教师名</th>
-				    	<th>上课时间</th>
-				    	<th>学期</th>
+				  	<tr >
+				    	<th style="text-align:center">课程号</th>
+				    	<th style="text-align:center">课程名</th>
+				    	<th style="text-align:center">学分</th>
+				    	<th style="text-align:center">教师号</th>
+				    	<th style="text-align:center">教师名</th>
+				    	<th style="text-align:center">上课时间</th>
+				    	<th style="text-align:center">学期</th>
 				  	</tr> 
 				  </thead>
 				  <tbody>
@@ -117,15 +117,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									o.setCtime(rs.getString("O.cTime"));
 									o.setCterm(rs.getInt("O.cTerm"));
 					 	%>
+					 	
 							<tr>
+							
 								<td><%= c.getCnum() %></td>
 								<td><%= c.getCname() %></td>
 								<td><%= c.getCredit() %></td>
 								<td><%= t.getTnum() %></td>
-								<td><%= t.getTname() %></td>
+								<td>
+									<form name="form1" class="layui-form" action="teacherInfo.jsp" method="post">
+										<input type="hidden" name="name">
+										<input type="hidden" name="number" value="<%=t.getTnum()%>">
+										<button class="layui-btn layui-btn-primary" style="border:0" lay-submit="" lay-filter="demo1"><%= t.getTname() %></button>
+									</form>
+								</td>
 								<td><%= o.getCtime() %></td>
 								<td><%= o.getRealTerm() %></td>
 							</tr>
+						
 			  		<%
 								}
 							}
