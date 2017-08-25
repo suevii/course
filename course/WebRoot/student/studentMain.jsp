@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    	<table class="layui-table" lay-skin="line" style="text-align:center">
 									<thead>
 										<tr>
-											<th style="text-align:center">开课号</th>
+											<!-- <th style="text-align:center">开课号</th> -->
 					            <th style="text-align:center">课程号</th>
 					            <th style="text-align:center">课程名</th>
 					            <th style="text-align:center">教师号</th>
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					        		String count = rs.getString(6);
 					        %>
 					        		<tr>
-						  					<td><input type="hidden" name="" value="<%= open_id %>"><%= open_id %></td>
+						  					<%-- <td><input type="hidden" name="" value="<%= open_id %>"><%= open_id %></td> --%>
 						  					<td><input type="hidden" name="" value="<%= cNum %>"><%= cNum %></td>
 						  					<td><input type="hidden" name="" value="<%= cName %>"><%= cName %></td>
 						  					<td><input type="hidden" name="" value="<%= tNum %>"><%= tNum %></td>
@@ -83,12 +83,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<thead>
 									<tr>
 										<th style="text-align:center">开课号</th>
-							            <th style="text-align:center">课程号</th>
-							            <th style="text-align:center">课程名</th>
-							            <th style="text-align:center">教师号</th>
-							            <th style="text-align:center">教师名</th>
-							            <th style="text-align:center">平均绩点</th>
-							        </tr>
+				            <th style="text-align:center">课程号</th>
+				            <th style="text-align:center">课程名</th>
+				            <th style="text-align:center">教师号</th>
+				            <th style="text-align:center">教师名</th>
+				            <th style="text-align:center">平均绩点</th>
+				        	</tr>
 								</thead>
 								<%
 									sql = "select O.open_id, C.cNum, cName, T.tNum, tName, avg(grade) "
@@ -97,22 +97,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													+ "GROUP BY C.cNum, cName, T.tNum "
 													+ "ORDER BY avg(grade) desc limit 5";
 									rs = MySQLDB.executeQuery(sql);
-						        	while(rs.next()){
-						        		String open_id = rs.getString(1);
-						        		String cNum = rs.getString(2);
-						        		String cName = rs.getString(3);
-						        		String tNum = rs.getString(4);
-						        		String tName = rs.getString(5);
-						        		String avgGrade = rs.getString(6);
-					        	%>
-					        		<tr>
-							  			<td><input type="hidden" name="" value="<%= open_id %>"><%= open_id %></td>
-							  			<td><input type="hidden" name="" value="<%= cNum %>"><%= cNum %></td>
-							  			<td><input type="hidden" name="" value="<%= cName %>"><%= cName %></td>
-							  			<td><input type="hidden" name="" value="<%= tNum %>"><%= tNum %></td>
-							  			<td><input type="hidden" name="" value="<%= tName %>"><%= tName %></td>
-							  			<td><input type="hidden" name="" value="<%= avgGrade %>"><%= avgGrade %></td>
-						  			</tr>
+				        	while(rs.next()){
+				        		String open_id = rs.getString(1);
+				        		String cNum = rs.getString(2);
+				        		String cName = rs.getString(3);
+				        		String tNum = rs.getString(4);
+				        		String tName = rs.getString(5);
+				        		String avgGrade = rs.getString(6);
+			        	%>
+			        		<tr>
+					  			<%-- <td><input type="hidden" name="" value="<%= open_id %>"><%= open_id %></td> --%>
+					  			<td><input type="hidden" name="" value="<%= cNum %>"><%= cNum %></td>
+					  			<td><input type="hidden" name="" value="<%= cName %>"><%= cName %></td>
+					  			<td><input type="hidden" name="" value="<%= tNum %>"><%= tNum %></td>
+					  			<td><input type="hidden" name="" value="<%= tName %>"><%= tName %></td>
+					  			<td><input type="hidden" name="" value="<%= avgGrade %>"><%= avgGrade %></td>
+				  			</tr>
 					 			<%
 									}
 								%>
@@ -122,31 +122,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    	<table class="layui-table" lay-skin="line" style="text-align:center">
 								<thead>
 									<tr>
-							            <th style="text-align:center">教师号</th>
-							            <th style="text-align:center">教师名</th>
-							            <th style="text-align:center">开课数</th>
-							        </tr>
+				            <th style="text-align:center">教师号</th>
+				            <th style="text-align:center">教师名</th>
+				            <th style="text-align:center">开课数</th>
+				        	</tr>
 								</thead>
 								<%
 									sql = "SELECT o.tNum,t.tName, count(0) AS 'class' FROM `open` o,teacher t where t.tNum = o.tNum GROUP BY o.tNum HAVING count(o.tNum) > 0 ORDER BY count(o.tNum) DESC,tNum LIMIT 5";
 									rs = MySQLDB.executeQuery(sql);
-						        	while(rs.next()){
-						        		String tNum = rs.getString("tNum");
-						        		String tName = rs.getString("tName");
-						        		String course = rs.getString("class");
-					        	%>
-					        		<tr>
-
-							  			<td><%= tNum %></td>
-							  			<td><%= tName %></td>
-							  			<td><%= course %></td>
-						  			</tr>
+				        	while(rs.next()){
+				        		String tNum = rs.getString("tNum");
+				        		String tName = rs.getString("tName");
+				        		String course = rs.getString("class");
+			        	%>
+			        		<tr>
+						  			<td><%= tNum %></td>
+						  			<td><%= tName %></td>
+						  			<td><%= course %></td>
+					  			</tr>
 					 			<%
 									}
 								%>
 							</table>
 						</div>
-					    <div class="layui-tab-item">内容4</div>
+					    <div class="layui-tab-item">
+						    <table class="layui-table" lay-skin="line" style="text-align:center">
+									<thead>
+										<tr>
+					            <th style="text-align:center">学号</th>
+					            <th style="text-align:center">姓名</th>
+					            <th style="text-align:center">平均成绩</th>
+					        	</tr>
+									</thead>
+									<%
+										sql = "SELECT S.sNum, sName, avg(grade) as avgGrade FROM `select` s, student st where st.sNum=s.sNum GROUP BY st.sNum ORDER BY avg(grade) DESC, sNum LIMIT 5";
+										rs = MySQLDB.executeQuery(sql);
+					        	while(rs.next()){
+					        		String sNum = rs.getString("S.sNum");
+					        		String sName = rs.getString("sName");
+					        		String avgGrade = rs.getString("avgGrade");
+				        	%>
+				        		<tr>
+							  			<td><%= sNum %></td>
+							  			<td><%= sName %></td>
+							  			<td><%= avgGrade %></td>
+						  			</tr>
+						 			<%
+										}
+									%>
+								</table>
+					    </div>
 					  </div>
 					</div>
 				</div>
