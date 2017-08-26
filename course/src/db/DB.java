@@ -122,7 +122,7 @@ public class DB {
 		}
 	}
 
-	public ArrayList getStudentCourse(String snum) {// 获取学生的课程
+	/*public ArrayList getStudentCourse(String snum) {// 获取学生的课程
 		try {
 			ArrayList al = new ArrayList();
 			Student student = new Student();
@@ -160,7 +160,7 @@ public class DB {
 			e.printStackTrace();
 			return null;
 		}
-	}
+	}*/
 
 	public HashMap<String, NamedTime> getNamedRecord(String tnum, long open_id) {
 		try {
