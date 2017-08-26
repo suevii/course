@@ -596,4 +596,25 @@ public class DB {
 		return null;
 	}
 	
+	public int setScore(List<String> student,List<Integer> score,Long openid){
+		try {
+			pstmt = conn.prepareStatement("update `select` set grade=? where open_id=? and sNum=? ");
+			
+			pstmt.setLong(2, openid);
+			
+			for(int i=0;i<student.size();i++){
+				System.out.print(openid+" "+student.get(i)+' '+score.get(i));
+
+				pstmt.setInt(1, score.get(i));
+				pstmt.setString(3, student.get(i));
+				int rs = pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return student.size();
+	}
+	
 }
