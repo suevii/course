@@ -20,10 +20,8 @@ public class CourseAction extends ActionSupport{
 		Map session = context.getSession();
 		session.put("coursenum",coursenum);
 		session.put("openid",openid);
-		UserTable user1 = (UserTable)session.get("user");
-		if(user1.getLevel() == 1)
-			return "teacher";
-		else
-			return "student";
+		
+		String character = (String)session.get("character");
+		return character;
 	}
 }

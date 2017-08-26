@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,java.sql.*,model.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,java.sql.*,model.*,model.vo.*" pageEncoding="UTF-8"%>
 <jsp:useBean id="DB" scope="page" class = "db.DB" />
 <%
 String path = request.getRequestURI();
@@ -10,11 +10,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<base href="<%=basePath%>">
 		<meta charset="UTF-8">
 		<title>课程管理系统</title>
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="This is my page">
 		<link rel="stylesheet" href="/course/layui/css/layui.css">
 		<link rel="stylesheet" href="/course/css/index.css">
  
@@ -31,20 +26,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<%
 				if(session.getAttribute("coursenum") != null)	
 					session.removeAttribute("coursenum");
-				UserTable user = (UserTable)session.getAttribute("user");
-  				String id = user.getId();
-  				Semester sem = new Semester();
-  				int nterm = sem.getTerm();
-  				ArrayList al = DB.getTeacherCourse(id);
-  				Iterator iter=al.iterator();
-  	  			while(iter.hasNext()){
-  	  				OpenCourse course = (OpenCourse)iter.next();
-  	  				String cname = course.getCname();
-  	  				String cnum = course.getCnum();
-  	  				String tnum = course.getTnum();
-  	  				int cterm = course.getTerm();
-  	  				String term = course.getRealTerm();
-  	  				Long open_id = course.getOpen_id();
+				//UserTable user = (UserTable)session.getAttribute("user");
+ 				//String id = user.getId();
+ 				String id = null;
+				Object user = session.getAttribute("user");
+				user = (Teacher)user;
+				id = ((Teacher)user).getTnum();
+				
+ 				Semester sem = new Semester();
+ 				int nterm = sem.getTerm();
+ 				ArrayList al = DB.getTeacherCourse(id);
+ 				Iterator iter=al.iterator();
+ 	  			while(iter.hasNext()){
+ 	  				OpenCourse course = (OpenCourse)iter.next();
+ 	  				String cname = course.getCname();
+ 	  				String cnum = course.getCnum();
+ 	  				String tnum = course.getTnum();
+ 	  				int cterm = course.getTerm();
+ 	  				String term = course.getRealTerm();
+ 	  				Long open_id = course.getOpen_id();
   			%>
   					<div style="width:250px;margin-left: 50px;float:left;text-align: center;">
   						<fieldset class="layui-elem-field">

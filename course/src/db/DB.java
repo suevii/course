@@ -11,9 +11,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import com.opensymphony.xwork2.ActionContext;
 
 import factory.HibernateSessionFactory;
 import model.Homework;
@@ -412,11 +415,23 @@ public class DB {
 		}
 	}
 	
-	public ArrayList findMailInfo1(UserTable user){   //获取发信箱内容
+	public ArrayList findMailInfo1(Object user){   //获取发信箱内容
 		try{				
-			DB db=new DB();
-			pstmt=conn.prepareStatement("select * from mail where num_from=?");
-			pstmt.setString(1, user.getId());
+			DB db = new DB();
+			ActionContext context = ActionContext.getContext();
+			Map session = context.getSession();
+			String character = (String)session.get("character");
+			pstmt = conn.prepareStatement("select * from mail where num_to=?");
+			String id = null;
+			if(character.equals("student")){
+				user = (Student)user;
+				id = ((Student)user).getSnum();
+			}else if(character.equals("teacher")){
+				user = (Teacher)user;
+				id = ((Teacher)user).getTnum();
+			}
+			pstmt = conn.prepareStatement("select * from mail where num_from=?");
+			pstmt.setString(1, id);
 			ArrayList al=new ArrayList();
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()){
@@ -437,15 +452,26 @@ public class DB {
 		}
 	}
 	
-	public ArrayList findMailInfo2(UserTable user){   //获取收信箱内容
-		try{					
-			DB db=new DB();
-			pstmt=conn.prepareStatement("select * from mail where num_to=?");
-			pstmt.setString(1,user.getId());
+	public ArrayList findMailInfo2(Object user){   //获取收信箱内容
+		try{		
+			DB db = new DB();
+			ActionContext context = ActionContext.getContext();
+			Map session = context.getSession();
+			String character = (String)session.get("character");
+			String id = null;
+			if(character.equals("student")){
+				user = (Student)user;
+				id = ((Student)user).getSnum();
+			}else if(character.equals("teacher")){
+				user = (Teacher)user;
+				id = ((Teacher)user).getTnum();
+			}
+			pstmt = conn.prepareStatement("select * from mail where num_to=?");
+			pstmt.setString(1,id);
 			ArrayList al=new ArrayList();
 			ResultSet rs=pstmt.executeQuery();
 			while(rs.next()){
-				MailTable mail=new MailTable();
+				MailTable mail = new MailTable();
 				mail.setMail_Id(rs.getInt(1));
 				mail.setNum_from(db.getName(rs.getString(2)));
 				mail.setNum_to(db.getName(rs.getString(3)));

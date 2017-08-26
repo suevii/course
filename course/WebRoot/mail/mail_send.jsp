@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*,model.*" pageEncoding="UTF-8"%>
 <%@page import="model.MailTable"%>
 <%@page import="model.UserTable"%>
+<%@page import="model.vo.*"%>
 <%@page import="db.DB"%>
 <%
 String path = request.getContextPath();
@@ -13,12 +14,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>发件箱</title>
-   
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -32,11 +27,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
  <body>
   <div class="layui-layout layui-layout-admin">
-			<%  UserTable user = (UserTable)session.getAttribute("user");
-			int level = user.getLevel(); 
-			String h1= level==0?"/student/head.jsp":"/teacher/head.jsp";
-			String h2= level==0?"/student/left.jsp":"/teacher/left.jsp";
-			System.out.println(level); %>
+			<%  
+				String character = (String)session.getAttribute("character");
+				int level = -1;
+				Object user = session.getAttribute("user");
+				String name = null;
+				if(character.equals("student")){
+					user = (Student)user;
+					level = 0;
+				}else if(character.equals("teacher")){
+					user = (Teacher)user;
+					level = 1;
+				}
+				String h1= level==0?"/student/head.jsp":"/teacher/head.jsp";
+				String h2= level==0?"/student/left.jsp":"/teacher/left.jsp";
+				System.out.println(level); 
+			%>
       <jsp:include page="<%=h1%>"/>
       <jsp:include page="<%=h2%>"/>
 			<div class="layui-body site-demo" style="margin-top: 30px;">
@@ -58,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<%
   		    DB db=new DB();
   		    
-  		    ArrayList al=db.findMailInfo1(user); 		   		    
+  		    ArrayList al = db.findMailInfo1(user); 		   		    
   			System.out.println(al);
   			Iterator iter=al.iterator();
   			int index=0;

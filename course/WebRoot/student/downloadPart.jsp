@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,model.*,java.sql.*,db.DB" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,model.*,java.sql.*,db.DB,model.vo.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ page language="java" import="com.opensymphony.xwork2.ActionContext" %>
 <jsp:useBean id="MySQLDB" class="db.DB"></jsp:useBean>
@@ -32,8 +32,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        	</tr>
 					</thead>
 	        <%
-	        	UserTable user = (UserTable)session.getAttribute("user");	//student
-	        	String userId = user.getId();
+						Object user = session.getAttribute("user");
+						user = (Student)user;
+						String userId = ((Student)user).getSnum();
+	        	//UserTable user = (UserTable)session.getAttribute("user");	//student
+	        	//String userId = user.getId();
 	        	String strOpen_id = (String)session.getAttribute("openid");	//open_id
 						int open_id = Integer.parseInt(strOpen_id);
 						String sql = "select * "

@@ -25,8 +25,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<%
 				if(session.getAttribute("coursenum") != null)	
 					session.removeAttribute("coursenum");
-				UserTable user = (UserTable)session.getAttribute("user");
- 				String id = user.getId();
+				//UserTable user = (UserTable)session.getAttribute("user");
+ 				//String id = user.getId();
+ 				//
+				String id = null;
+				Object user = session.getAttribute("user");
+				user = (Student)user;
+				id = ((Student)user).getSnum();
+				
  				Semester sem = new Semester();
  				int nterm = sem.getTerm();
  				ArrayList al = DB.getStudentCourse(id);
