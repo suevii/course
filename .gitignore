@@ -61,3 +61,5 @@ course/WebRoot/WEB-INF/classes/action/LoginAction.class
 course/WebRoot/WEB-INF/classes/db/DB.class
 course/WebRoot/WEB-INF/classes/action/CourseAction.class
 *.class
+course/WebRoot/WEB-INF/classes/action/CourseAction.class
+*.class
