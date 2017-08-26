@@ -92,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				            <th style="text-align:center">课程名</th>
 				            <th style="text-align:center">教师号</th>
 				            <th style="text-align:center">教师名</th>
-				            <th style="text-align:center">平均绩点</th>
+				            <th style="text-align:center">平均成绩</th>
 				        	</tr>
 								</thead>
 								<%

@@ -25,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<%
 				if(session.getAttribute("coursenum") != null)	
 					session.removeAttribute("coursenum");
+
 				String id = null;
 				Object user = session.getAttribute("user");
 				user = (Student)user;

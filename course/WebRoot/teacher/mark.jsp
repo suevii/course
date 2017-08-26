@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,db.DB,model.*"
+<%@ page language="java" import="java.util.*,db.DB,model.*,model.UserTable,java.sql.*,db.DB,model.vo.*"
 	pageEncoding="UTF-8"%>
 <%
 	String path = request.getRequestURI();
@@ -50,12 +50,23 @@
 }
 </style>
 <%
-	UserTable user = (UserTable) session.getAttribute("user");
-	String id = user.getId();
+	String character = (String) session.getAttribute("character");
+	String name = null;
+	String id =null;
+	Object user = session.getAttribute("user");
+	if (character.equals("student")) {
+		user = (Student) user;
+		name = ((Student) user).getSname();
+		id = ((Student) user).getSnum();
+	} else if (character.equals("teacher")) {
+		user = (Teacher) user;
+		name = ((Teacher) user).getTname();
+		id=((Teacher)user).getTnum();
+	}
 	String cnum = (String) session.getAttribute("coursenum");
 	long openid = Long.parseLong((String) session.getAttribute("openid"));
 	DB db = new DB();
-	HashMap<String, NamedTime> time = db.getNamedRecord(user.getId(), openid);
+	HashMap<String, NamedTime> time = db.getNamedRecord(id, openid);
 	List<UserTable> studentList = db.getStudentList(openid);
 	List<String> keyList = new ArrayList<String>();
 	Iterator<String> it = time.keySet().iterator();
