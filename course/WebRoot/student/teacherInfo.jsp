@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<table border="1" class="layui-table" lay-even lay-skin="line">
 		  <thead>
 		  	<tr>
-		    	<th colspan="4"><%=tinfo.getTname()%>教师信息</th>
+		    	<th colspan="4" style="text-align:center"><%=tinfo.getTname()%>教师信息</th>
 		  	</tr> 
 		  </thead>
   		<tbody>
@@ -138,8 +138,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 
 		</div>
-		<script src="/school/layui/layui.js"></script>
-		<script src="/school/layui/lay/dest/layui.all.js"></script>  
+		<script src="/course/layui/layui.js"></script>
+		<script src="/course/layui/lay/dest/layui.all.js"></script>  
 	</div>
 
 </body>

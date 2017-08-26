@@ -90,12 +90,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<table class="layui-table" lay-skin="line" style="text-align:center">
 								<thead>
 									<tr>
-										<th style="text-align:center">开课号</th>
+										<!-- <th style="text-align:center">开课号</th> -->
 				            <th style="text-align:center">课程号</th>
 				            <th style="text-align:center">课程名</th>
 				            <th style="text-align:center">教师号</th>
 				            <th style="text-align:center">教师名</th>
-				            <th style="text-align:center">平均绩点</th>
+				            <th style="text-align:center">平均成绩</th>
 				        	</tr>
 								</thead>
 								<%

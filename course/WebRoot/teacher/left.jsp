@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<dd><a href="/course/teacher/course.jsp">我的课程</a></dd>
 							</dl>
 							<dl class="layui-nav-child">
-								<dd><a href="">教学情况</a></dd>
+								<dd><a href="teacherScore.jsp">教学情况</a></dd>
 							</dl>
 						</li>
 						<li class="layui-nav-item layui-nav-itemed">
