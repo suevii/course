@@ -29,13 +29,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<![endif]-->
 
 </head>
-<%
+<% 
 	if (session.getAttribute("user") != null) {
-		UserTable user = (UserTable) session.getAttribute("user");
-		if (user.getLevel() == 1)
-			response.sendRedirect("/course/teacher/teacherMain.jsp");
-		else
+		if(session.getAttribute("character").equals("student"))
 			response.sendRedirect("/course/student/studentMain.jsp");
+		else
+			response.sendRedirect("/course/teacher/teacherMain.jsp");
 	}
 %>
 <body>

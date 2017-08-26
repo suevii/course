@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,model.UserTable,java.sql.*,db.DB" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,model.UserTable,java.sql.*,db.DB,model.vo.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getRequestURI();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
@@ -17,8 +17,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="layui-layout layui-layout-admin">
 			<jsp:include page="head.jsp"/>
 			<jsp:include page="left.jsp"/>
-		<%UserTable user = (UserTable)session.getAttribute("user");
-			String name = user.getUsername(); %>
+		<%
+				String character = (String)session.getAttribute("character");
+				String name = null;
+				Object user = session.getAttribute("user");
+				if(character.equals("student")){
+					user = (Student)user;
+					name = ((Student)user).getSname();
+				}else if(character.equals("teacher")){
+					user = (Teacher)user;
+					name = ((Teacher)user).getTname();
+				}
+			%>
 		<div class="layui-body site-demo" style="margin-top: 30px;">
 			<fieldset class="layui-elem-field layui-field-title">
 	  			<legend><%=name %>，欢迎你登录课程项目管理系统！</legend>
