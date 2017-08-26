@@ -138,8 +138,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 
 		</div>
-		<script src="/school/layui/layui.js"></script>
-		<script src="/school/layui/lay/dest/layui.all.js"></script>  
+		<script src="/course/layui/layui.js"></script>
+		<script src="/course/layui/lay/dest/layui.all.js"></script>  
 	</div>
 
 </body>
