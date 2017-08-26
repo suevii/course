@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,model.*,model.vo.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,model.*,model.vo.*,dao.*" pageEncoding="UTF-8"%>
 <jsp:useBean id="DB" scope="page" class = "db.DB" />
 <%
 String path = request.getRequestURI();
@@ -25,31 +25,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<%
 				if(session.getAttribute("coursenum") != null)	
 					session.removeAttribute("coursenum");
-
 				String id = null;
 				Object user = session.getAttribute("user");
 				user = (Student)user;
 				id = ((Student)user).getSnum();
-				
  				Semester sem = new Semester();
  				int nterm = sem.getTerm();
- 				ArrayList al = DB.getStudentCourse(id);
+ 				
+ 				IStudentCourseDAO studentCourseDAO = new StudentCourseDAO();
+ 				ArrayList al = studentCourseDAO.getStudentCourse(id);
  				Iterator iter = al.iterator();
   			while(iter.hasNext()){
   				HashMap<String, Object> map = (HashMap)iter.next();
-  				Course course = (Course)map.get("course");
-  				Teacher teacher = (Teacher)map.get("teacher");
-  				Open open = (Open)map.get("open");
-  				Select select = (Select)map.get("select");
-  				
-  				String cname = course.getCname();
-  				String cnum = course.getCnum();
-  				String tnum = teacher.getTnum();
-  				String tname = teacher.getTname();
-  				int cterm = open.getCterm();
-  				String realTerm = open.getRealTerm();
-  				Long open_id = open.getOpenId();
-  				//Long open_id = select.getId().getOpen().getOpenId();
+  				Long open_id = Long.valueOf(String.valueOf(map.get("open_id")));
+  				String cnum = (String)map.get("cNum");
+  				String cname = (String)map.get("cName");
+  				String tnum = (String)map.get("tNum");
+  				String tname = (String)map.get("tName");
+  				int cterm = Integer.parseInt(String.valueOf(map.get("cTerm")));
  			%>
   					<div style="width:250px;margin-left: 50px;float:left;text-align: center;">
   						<fieldset class="layui-elem-field">
@@ -59,7 +52,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   									<br>
   									<%= tname %><br>
   									<%= cnum %><br>
-  									<%= realTerm.substring(0,4) + realTerm.substring(5,6) %>
+  									<%-- <%= realTerm.substring(0,4) + realTerm.substring(5,6) %> --%>
+  									<%= cterm %>
  								</div>
   								<br>
   								<form action="course" method="post">
