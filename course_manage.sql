@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 我的连接
-Source Server Version : 50718
+Source Server         : course
+Source Server Version : 50719
 Source Host           : localhost:3306
 Source Database       : course_manage
 
 Target Server Type    : MYSQL
-Target Server Version : 50718
+Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2017-08-22 22:33:30
+Date: 2017-08-26 15:30:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `course`
+-- Table structure for course
 -- ----------------------------
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
@@ -37,7 +37,7 @@ INSERT INTO `course` VALUES ('08306099', 'Java程序设计(实践)', '4');
 INSERT INTO `course` VALUES ('08306120', 'Java EE开发技术', '4');
 
 -- ----------------------------
--- Table structure for `course_file`
+-- Table structure for course_file
 -- ----------------------------
 DROP TABLE IF EXISTS `course_file`;
 CREATE TABLE `course_file` (
@@ -62,7 +62,7 @@ INSERT INTO `course_file` VALUES ('10', '12');
 INSERT INTO `course_file` VALUES ('14', '13');
 
 -- ----------------------------
--- Table structure for `file`
+-- Table structure for file
 -- ----------------------------
 DROP TABLE IF EXISTS `file`;
 CREATE TABLE `file` (
@@ -90,7 +90,7 @@ INSERT INTO `file` VALUES ('10', '第三章%2b关系运算.pptx', 'D:\\file\\100
 INSERT INTO `file` VALUES ('14', '第4章 结构化查询语言SQL.ppt', 'D:\\file\\10000005\\第4章 结构化查询语言SQL.ppt', '10000005', '2017-05-30 12:52:26');
 
 -- ----------------------------
--- Table structure for `homework`
+-- Table structure for homework
 -- ----------------------------
 DROP TABLE IF EXISTS `homework`;
 CREATE TABLE `homework` (
@@ -109,7 +109,7 @@ INSERT INTO `homework` VALUES ('第一次作业', '2', '完成课后习题', '20
 INSERT INTO `homework` VALUES ('第九周作业', '1', '抄书100遍', '2017-05-30 20:21:53', '2017-06-01 00:00:00');
 
 -- ----------------------------
--- Table structure for `mail`
+-- Table structure for mail
 -- ----------------------------
 DROP TABLE IF EXISTS `mail`;
 CREATE TABLE `mail` (
@@ -126,7 +126,7 @@ CREATE TABLE `mail` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `named_record`
+-- Table structure for named_record
 -- ----------------------------
 DROP TABLE IF EXISTS `named_record`;
 CREATE TABLE `named_record` (
@@ -140,7 +140,7 @@ CREATE TABLE `named_record` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `named_time`
+-- Table structure for named_time
 -- ----------------------------
 DROP TABLE IF EXISTS `named_time`;
 CREATE TABLE `named_time` (
@@ -157,7 +157,7 @@ CREATE TABLE `named_time` (
 INSERT INTO `named_time` VALUES ('23', '10000002', '1', '2017-05-30 20:20:13');
 
 -- ----------------------------
--- Table structure for `open`
+-- Table structure for open
 -- ----------------------------
 DROP TABLE IF EXISTS `open`;
 CREATE TABLE `open` (
@@ -191,7 +191,7 @@ INSERT INTO `open` VALUES ('12', '08305014', '10000003', '20164', '三1-2 三3-4
 INSERT INTO `open` VALUES ('13', '08305014', '10000005', '20164', '三1-2 三3-4 学院机房上机 五1-2 研讨');
 
 -- ----------------------------
--- Table structure for `select`
+-- Table structure for select
 -- ----------------------------
 DROP TABLE IF EXISTS `select`;
 CREATE TABLE `select` (
@@ -216,17 +216,21 @@ INSERT INTO `select` VALUES ('4', '14120000', null);
 INSERT INTO `select` VALUES ('5', '14120926', '84');
 INSERT INTO `select` VALUES ('5', '14121980', '85');
 INSERT INTO `select` VALUES ('6', '14120000', null);
+INSERT INTO `select` VALUES ('6', '14122145', '80');
 INSERT INTO `select` VALUES ('8', '14120926', '89');
 INSERT INTO `select` VALUES ('9', '14121980', '85');
+INSERT INTO `select` VALUES ('9', '14122145', '79');
 INSERT INTO `select` VALUES ('10', '14120926', '87');
 INSERT INTO `select` VALUES ('10', '14121980', '88');
+INSERT INTO `select` VALUES ('10', '14122145', '60');
 INSERT INTO `select` VALUES ('11', '14120000', null);
 INSERT INTO `select` VALUES ('12', '14120926', '84');
 INSERT INTO `select` VALUES ('12', '14121980', '85');
 INSERT INTO `select` VALUES ('13', '14120000', null);
+INSERT INTO `select` VALUES ('13', '14122145', '80');
 
 -- ----------------------------
--- Table structure for `student`
+-- Table structure for student
 -- ----------------------------
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student` (
@@ -249,7 +253,7 @@ INSERT INTO `student` VALUES ('14122145', '朱琪', '14122145', '计算机工程
 INSERT INTO `student` VALUES ('14122158', '符政峰', '14122158', '计算机工程与科学学院', null);
 
 -- ----------------------------
--- Table structure for `teacher`
+-- Table structure for teacher
 -- ----------------------------
 DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
@@ -274,3 +278,4 @@ INSERT INTO `teacher` VALUES ('10000004', '滕中梅', '10000004', '女', null, 
 INSERT INTO `teacher` VALUES ('10000005', '宋安平', '10000005', '男', '博士', '计算机工程与科学学院', '副教授', '宋安平（apsong@shu.edu.cn），男，讲师，工学博士。本科毕业留校后，一直在上海大学计算机学院工作，主要从事教学、科研等方面工作，研究方向为医学图像处理及算法、生物信息学、数据库应用和并行计算等。主要进行对大型数据库管理系统中数据挖掘、分析和处理等工作，尤其对数据库中图像数据的建立和处理，三维医学图像相似性方面开展了一定的研究工作，先后主持和参与国家及上海市多项科研项目，发表论文20多篇，主编教材一本，协助指导研究生6名，2009年获得上海大学本科教学比赛一等奖。');
 INSERT INTO `teacher` VALUES ('10000006', '沈俊', '10000006', '男', '硕士', '计算机工程与科学学院', '讲师', '1989年毕业于上海科技大学计算机科学系。毕业后留校工作至今，主要从事计算机科学的科研和教学工作。\r\n在科研工作方面，主要从事数据库和知识库、软件工程、人工智能、信息管理系统及决策支持系统等方面的研究。先后承担或参加的项目有：国防科工委“七.五”军用共性软件项目《决策支持系统生成器》；国防科工委“八.五”军用人工智能预研项目《智能决策支持系统生成器》；《上海信息城》项目；上海市电话号簿公司的《利用Framemaker实现号簿排版的可行性研究》和《易派彩色号簿排版系统》。\r\n在教学工作方面，承担过多门课程的辅导和主讲。主要课程有：《数据结构》、《编译原理》等。');
 INSERT INTO `teacher` VALUES ('10000007', '宋波', '10000007', '男', '硕士', '计算机工程与科学学院', '讲师', '教学理念：\r\n    反对死记硬背，提倡快乐学习。通过灵活多样的各种方法激发学生兴趣，使学生尽可能在课堂内循序渐进地吸收掌握知识，并达到学以致用的目的。\r\n    以“授人以鱼不如授人以渔”为理念，引导培养学生良好的学习习惯和学习能力为主要教学追求和目的，主张大学教育以引领学生学习为主，而不仅仅是知识点的讲述。\r\n\r\n主要研究方向：\r\n    网络多媒体、虚拟仪器、.NET应用开发、面向对象程序设计、JavaEE开发、计算机图形学等。');
+SET FOREIGN_KEY_CHECKS=1;
