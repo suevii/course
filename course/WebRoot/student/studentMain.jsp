@@ -35,9 +35,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</fieldset>
 				
 				<div class="panel panel-default" style="margin:30px;">
-					<!-- <div class="panel-heading">
-						<h2 class="panel-title">热门课程Top 5</h2>
-					</div> -->
 					<div class="layui-tab">
 					  <ul class="layui-tab-title">
 					    <li class="layui-this">人气课程</li>
@@ -90,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<table class="layui-table" lay-skin="line" style="text-align:center">
 								<thead>
 									<tr>
-										<th style="text-align:center">开课号</th>
+										<!-- <th style="text-align:center">开课号</th> -->
 				            <th style="text-align:center">课程号</th>
 				            <th style="text-align:center">课程名</th>
 				            <th style="text-align:center">教师号</th>
