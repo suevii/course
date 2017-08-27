@@ -73,12 +73,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					o.setCterm(rs.getInt("cTerm"));
 					double avg = rs.getDouble("avg");
 	 	%>
-	 	<table border="1" class="layui-table" lay-skin="line">
+	 	<table border="1" class="layui-table" lay-skin="line" >
 		  <thead>
 		  	<tr>
 		  		<th colspan="5" style="text-align:center"><%=o.getRealTerm() %></th>
 		  	</tr>
-		  	
 		  </thead>
   		<tbody>
   			<tr>
@@ -110,7 +109,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<tr>
 				<td><%= st.getSnum() %></td>
-				<td><%= st.getSname() %></td>
+				<td>
+					<form name="form1" class="layui-form" action="studentInfo.jsp" method="post">
+						<input type="hidden" name="name">
+						<input type="hidden" name="number" value="<%=st.getSnum()%>">
+						<button class="layui-btn layui-btn-primary" style="border:0" lay-submit="" lay-filter="demo1"><%= st.getSname() %></button>
+					</form>
+				</td>
 				<td><%= dept %></td>
 				<td><%= gpa %></td>
 				<td><%= s.getGrade() %></td>

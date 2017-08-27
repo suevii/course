@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td>手机号</td><td><%=sinfo.getSphone()%></td>
 			</tr>
 			<tr>
-				<td>GPA</td><td><%=sinfo.getGpa()%></td>
+				<td>均绩</td><td colspan="3"><%=sinfo.getGpa()%></td>
 			</tr>
   		</tbody>
 		</table>
