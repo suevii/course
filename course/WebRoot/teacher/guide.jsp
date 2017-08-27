@@ -36,6 +36,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a href="/course/teacher/upload.jsp">资料</a>
 						</li>
 						<li class="layui-nav-item ">
+							<a href="/course/teacher/score.jsp">登分</a>
+						</li>
+						<li class="layui-nav-item ">
 							<a href="/course/logout.jsp">注销</a>
 						</li>
 					</ul>

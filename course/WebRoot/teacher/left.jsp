@@ -38,10 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<dd><a href="/course/teacher/teacherInfo.jsp">教师查询</a></dd>
 							</dl>
 							<dl class="layui-nav-child">
-								<dd><a href="">专业课比较</a></dd>
-							</dl>
-							<dl class="layui-nav-child">
-								<dd><a href="">基础课比较</a></dd>
+								<dd><a href="compare.jsp">课程比较</a></dd>
 							</dl>
 						</li>
 						<li class="layui-nav-item layui-nav-itemed">

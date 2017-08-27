@@ -29,9 +29,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  <label class="layui-form-label">选择学期</label>
 				<div class="layui-input-inline">
 				  <select name="term" lay-search="">
-				    <option value="">直接选择或搜索选择</option>
-				    <option value="20171">2017年春季学期</option>
-				    <option value="20164">2016年冬季学期</option>
+				    <option value="%">全部学期</option>
+				<%
+				    Teacher user = (Teacher)session.getAttribute("user");
+					String id = user.getTnum();
+					String sql = "select DISTINCT cTerm from `open` WHERE tNum = '"+id+"'";
+					Open oterm = new Open();
+					ResultSet rs = DB.executeQuery(sql);
+					while (rs.next()) {
+						oterm.setCterm(rs.getInt("cTerm"));
+						String selection = oterm.getRealTerm();
+						String value = oterm.getCterm().toString();
+				%>
+					<option value=<%=value %>><%=selection %></option>
+				<%
+					}
+				%>
 				  </select>
 				</div>
 			  <div class="layui-inline">
@@ -46,49 +59,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	<%
 		 	if(request.getParameter("term") != null){
 				String term = request.getParameter("term");
-				//String term = "20164";
-				Teacher user = (Teacher)session.getAttribute("user");
-				String id = user.getTnum();
-				//String id = "10000001";
-		 		String sql = "SELECT s.sNum, st.sName, s.grade,c.cNum, c.cName from `select` s, `open` o, student st, course c"
-		 				+" WHERE o.open_id = s.open_id AND s.sNum = st.sNum AND c.cNum = o.cNum "
-		 				+"AND o.tNum = '"+id+"'AND o.cTerm = '"+term+"' ORDER BY  s.sNum, c.cNum";
-				ResultSet rs = DB.executeQuery(sql);
+				String sql1 = "SELECT c.cNum, c.cName, avg(s.grade) as avg,o.cTerm from `select` s, `open` o, course c "
+						+"WHERE o.open_id = s.open_id AND c.cNum = o.cNum "
+						+"AND o.tNum = '"+id+"' AND o.cTerm LIKE '"+term+"' GROUP BY o.cTerm DESC, c.cNum";
+				rs = DB.executeQuery(sql1);
 				Select s = new Select();
 				Student st = new Student();
 				Open o = new Open();
 				Course c = new Course();
-				o.setCterm(Integer.parseInt(term));
-		%>
-		<div class="panel-heading">
-			<h2 class="panel-title"><%= o.getRealTerm() %></h2>
-		</div>
-		<table border="1" class="layui-table" lay-even lay-skin="line">
-		  <thead>
-		  	<tr>
-		  		<th>学号</th>
-		  		<th>姓名</th>
-		  		<th>课程号</th>
-		  		<th>课程名</th>
-		  		<th>成绩</th>
-		  	</tr>
-		  </thead>
-  		<tbody>
-		<%
 				while (rs.next()) {
-					st.setSnum(rs.getString("sNum"));
-					st.setSname(rs.getString("sName"));
-					s.setGrade(rs.getInt("grade"));
 					c.setCnum(rs.getString("cNum"));
 					c.setCname(rs.getString("cName"));
+					o.setCterm(rs.getInt("cTerm"));
+					double avg = rs.getDouble("avg");
 	 	%>
+	 	<table border="1" class="layui-table" lay-skin="line">
+		  <thead>
+		  	<tr>
+		  		<th colspan="5" style="text-align:center"><%=o.getRealTerm() %></th>
+		  	</tr>
+		  	
+		  </thead>
+  		<tbody>
+  			<tr>
+		  		<td>课程号</td>
+		  		<td><%= c.getCnum() %></td>
+		  		<td>课程名</td>
+		  		<td><%= c.getCname() %></td>
+		  		<td>平均成绩：<%=avg %></td>
+		  	</tr>
+			<tr>
+				<td>学号</td>
+				<td>姓名</td>
+				<td>学院</td>
+				<td>均绩</td>
+				<td>成绩</td>
+			</tr>
+			<%
+			String sql2 = "SELECT st.sNum, st.sName, s.grade,st.sDept,st.gpa from `select` s, `open` o, student st, course c"
+	 				+" WHERE o.open_id = s.open_id AND s.sNum = st.sNum AND c.cNum = o.cNum "
+	 				+"AND o.tNum = '"+id+"'AND o.cTerm LIKE '"+o.getCterm()+"' ORDER BY  s.sNum, c.cNum";
+			ResultSet rs2 = DB.executeQuery(sql2);
+			while(rs2.next()){
+				st.setSnum(rs2.getString("sNum"));
+				st.setSname(rs2.getString("sName"));
+				s.setGrade(rs2.getInt("grade")); 
+				String dept = rs2.getString("sDept");
+				double gpa = rs2.getDouble("gpa");
+			%>
+			
 			<tr>
 				<td><%= st.getSnum() %></td>
 				<td><%= st.getSname() %></td>
-				<td><%= c.getCnum() %></td>
-				<td><%= c.getCname() %></td>
+				<td><%= dept %></td>
+				<td><%= gpa %></td>
 				<td><%= s.getGrade() %></td>
 			</tr>
+			<%} %>
 			
 		<%} %>
   		</tbody>
