@@ -13,8 +13,23 @@
         <property name="sname" type="java.lang.String">
             <column name="sName" length="20" />
         </property>
+        <property name="ssex" type="java.lang.String">
+            <column name="sSex" length="20" />
+        </property>
+        <property name="sbirthplace" type="java.lang.String">
+            <column name="sBirthplace" length="20" />
+        </property>
+        <property name="sphone" type="java.lang.String">
+            <column name="sPhone" length="20" />
+        </property>
         <property name="pwd" type="java.lang.String">
             <column name="pwd" length="20" />
+        </property>
+        <property name="sdept" type="java.lang.String">
+            <column name="sDept" length="20" />
+        </property>
+        <property name="gpa" type="java.lang.Double">
+            <column name="gpa" precision="10" scale="3" />
         </property>
         <set name="selects" inverse="true">
             <key>
