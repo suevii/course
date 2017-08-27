@@ -17,41 +17,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
   <div class="layui-layout layui-layout-admin">
-    <jsp:include page="head.jsp"/>
-		<jsp:include page="left.jsp"/>
+    <jsp:include page="../student/head.jsp"/>
+		<jsp:include page="../student/left.jsp"/>
     <div class="layui-body site-demo">
+
  		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
   		  <legend>课程比较</legend>
 		</fieldset>
 		<form class="layui-form" action="">
-			<div class="layui-form-item">
-				<div class="layui-inline">
-					<label class="layui-form-label">课程号</label>
-					<div class="layui-input-inline">
-					  <input type="text" name="cnum" class="layui-input">
-					</div>
+		   <div class="layui-form-item">
+		     <div class="layui-inline">
+			   <label class="layui-form-label">课程号</label>
+				<div class="layui-input-inline">
+				  <input type="text" name="cnum" class="layui-input">
 				</div>
-				<div class="layui-inline">
-				  <label class="layui-form-label">选择学期</label>
-					<div class="layui-input-inline">
-					  <select name="term" lay-search="">
-					    <option value="%">全部学期</option>
-							<%
-								String sql = "select DISTINCT cTerm from `open`";
-								Open oterm = new Open();
-								ResultSet rs = DB.executeQuery(sql);
-								while (rs.next()) {
-									oterm.setCterm(rs.getInt("cTerm"));
-									String selection = oterm.getRealTerm();
-									String value = oterm.getCterm().toString();
-							%>
-								<option value=<%=value %>><%=selection %></option>
-							<%
-								}
-							%>
-					  </select>
-					</div>
+			 </div>
+		     <div class="layui-inline">
+			  <label class="layui-form-label">选择学期</label>
+				<div class="layui-input-inline">
+				  <select name="term" lay-search="">
+				    <option value="%">全部学期</option>
+				<%
+					String sql = "select DISTINCT cTerm from `open`";
+					Open oterm = new Open();
+					ResultSet rs = DB.executeQuery(sql);
+					while (rs.next()) {
+						oterm.setCterm(rs.getInt("cTerm"));
+						String selection = oterm.getRealTerm();
+						String value = oterm.getCterm().toString();
+				%>
+					<option value=<%=value %>><%=selection %></option>
+				<%
+					}
+				%>
+				  </select>
 				</div>
+			</div>
 			  <div class="layui-inline">
 				<div class="layui-input-block">
 				  <button class="layui-btn" lay-submit="" lay-filter="demo1">查询</button>

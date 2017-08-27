@@ -598,4 +598,81 @@ public class DB {
 			return null;
 		}
 	}
+	
+	public double getCourseAttendence (long open_id) {
+		try {
+
+			pstmt = conn
+					.prepareStatement("select COUNT(*) from named_time t,named_record r  where t.open_id=? and t.named_id=r.named_id ");
+			pstmt.setLong(1, open_id);
+			int absence=0;
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				absence=rs.getInt(1);
+			}
+
+			
+			pstmt = conn
+					.prepareStatement("select COUNT(*) from `select` s where s.open_id=? ");
+			pstmt.setLong(1, open_id);
+			int studentCount=0;
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				studentCount=rs.getInt(1);
+			}
+			
+			
+			pstmt = conn.prepareStatement("select COUNT(*) from named_time where open_id=?");
+			pstmt.setLong(1, open_id);
+			rs = pstmt.executeQuery();
+			int namedTime=0;
+			while (rs.next()) {
+				namedTime=rs.getInt(1);
+			}
+			double count=studentCount*namedTime;
+			double ans=1-(absence/count);
+			return ans;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	
+	public double getStudentAttendence (long open_id,String snum) {
+		try {
+
+			pstmt = conn
+					.prepareStatement("select COUNT(*) from named_time t,named_record r  where t.open_id=? and t.named_id=r.named_id  and r.snum=? ");
+			pstmt.setLong(1, open_id);
+			pstmt.setString(2, snum);
+			int absence=0;
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				absence=rs.getInt(1);
+				System.out.println(rs.getInt(1));
+
+			}
+			
+			
+			pstmt = conn.prepareStatement("select COUNT(*) from named_time where open_id=?");
+			pstmt.setLong(1, open_id);
+			rs = pstmt.executeQuery();
+			int namedTime=0;
+			while (rs.next()) {
+				namedTime=rs.getInt(1);
+				System.out.println(rs.getInt(1));
+
+			}
+			double count=namedTime;
+			double ans=1-(absence/count);
+			return ans;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	
+	
 }
