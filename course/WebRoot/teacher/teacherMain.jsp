@@ -150,7 +150,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								%>
 							</table>
 						</div>
-					    <div class="layui-tab-item">内容4</div>
+					    <div class="layui-tab-item">
+					    <table class="layui-table" lay-skin="line" style="text-align:center">
+									<thead>
+										<tr>
+					            <th style="text-align:center">学号</th>
+					            <th style="text-align:center">姓名</th>
+					            <th style="text-align:center">平均成绩</th>
+					        	</tr>
+									</thead>
+									<%
+										sql = "SELECT S.sNum, sName, avg(grade) as avgGrade FROM `select` s, student st where st.sNum=s.sNum GROUP BY st.sNum ORDER BY avg(grade) DESC, sNum LIMIT 5";
+										rs = MySQLDB.executeQuery(sql);
+					        	while(rs.next()){
+					        		String sNum = rs.getString("S.sNum");
+					        		String sName = rs.getString("sName");
+					        		String avgGrade = rs.getString("avgGrade");
+				        	%>
+				        		<tr>
+							  			<td><%= sNum %></td>
+							  			<td><%= sName %></td>
+							  			<td><%= avgGrade %></td>
+						  			</tr>
+						 			<%
+										}
+									%>
+								</table>
+								</div>
 					  </div>
 					</div>
 				</div>
