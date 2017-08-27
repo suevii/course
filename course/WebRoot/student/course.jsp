@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,model.*,model.vo.*,dao.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,model.*,model.vo.*,dao.*,dao.impl.*" pageEncoding="UTF-8"%>
 <jsp:useBean id="DB" scope="page" class = "db.DB" />
 <%
 String path = request.getRequestURI();
@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				Object user = session.getAttribute("user");
 				user = (Student)user;
 				id = ((Student)user).getSnum();
- 				Semester sem = new Semester();
+ 				model.Semester sem = new model.Semester();
  				int nterm = sem.getTerm();
  				
  				IStudentCourseDAO studentCourseDAO = new StudentCourseDAO();

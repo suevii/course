@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 
+import dao.impl.ILoginDAO;
 import factory.HibernateSessionFactory;
 import model.UserTable;
 import model.vo.*;

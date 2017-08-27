@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,model.vo.*,db.DB,java.sql.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,model.vo.*,db.DB,java.sql.*,dao.*,dao.impl.*" pageEncoding="UTF-8"%>
 <%@taglib uri="/struts-tags" prefix="s"%>
 <jsp:useBean id="DB" scope="page" class = "db.DB" />
 <%
@@ -56,7 +56,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    	<input type="text" name="credit" class="layui-input">
 				    </div>
 					</div>
-			    
+					<div class="layui-inline">
+			  		<label class="layui-form-label">选择学期</label>
+				    <div class="layui-input-inline">
+						  <select name="term" lay-search="">
+						    <option value="%">全部学期</option>
+								<%
+									String sql1 = "select DISTINCT cTerm from `open`";
+									Open oterm = new Open();
+									ResultSet rs1 = DB.executeQuery(sql1);
+									while (rs1.next()) {
+										oterm.setCterm(rs1.getInt("cTerm"));
+										String selection = oterm.getRealTerm();
+										String value = oterm.getCterm().toString();
+								%>
+									<option value=<%=value %>><%=selection %></option>
+								<%
+									}
+								%>
+						  </select>
+						</div>
+					</div>
 				</div>
 				<div class="layui-form-item">
 			    <div class="layui-input-block">
@@ -83,26 +103,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				  </thead>
 				  <tbody>
 				 	<%
-					 	if(request.getParameter("cNum") != null || request.getParameter("cName") != null){
-							String cNum = request.getParameter("cNum");
+				 		if(request.getParameter("cNum") != null || request.getParameter("cName") != null){
+					 		String cNum = request.getParameter("cNum");
 							String cName = new String(request.getParameter("cName").getBytes("iso8859-1"),"utf-8");
 							String tNum = request.getParameter("tNum");
 							String tName = new String(request.getParameter("tName").getBytes("iso8859-1"),"utf-8");
+							String term = request.getParameter("term");
 							int credit = 0;
-							if(request.getParameter("credit") == null || request.getParameter("credit") == "");
-							else
+							if(request.getParameter("credit") != null && request.getParameter("credit") != "");
 								credit = Integer.parseInt(request.getParameter("credit"));
-					 		String sql = "select * from course C, open O, teacher T "
-					 								+	"where (O.cNum = '" + cNum 
-					 								+ "' or C.cName = '" + cName 
-					 								+ "' or O.tNum = '" + tNum
-					 								+ "' or T.tName = '" + tName 
-					 								+ "' or C.credit = " + credit + ")"
-					 								+ " and T.tNum=O.tNum and C.cNum=O.cNum";
+					 		String sql = "SELECT * "
+													+ "FROM course c, open o, teacher T "
+													+ "WHERE 1=1 AND T.tNum = O.tNum AND C.cNum = O.cNum ";
+							if(request.getParameter("cNum") != null && request.getParameter("cNum") != "")
+								sql += " AND c.cNum = '" + cNum + "'";
+							if(request.getParameter("cName") != null && request.getParameter("cName") != "")
+								sql += " AND c.cName = '" + cName + "'";
+							if(request.getParameter("tNum") != null && request.getParameter("tNum") != "")
+								sql += " AND T.tNum = '" + tNum + "'";
+							if(request.getParameter("tName") != null && request.getParameter("tName") != "")
+								sql += " AND t.tName = '" + tName + "'";
+							if(request.getParameter("term") != null && request.getParameter("term") != "")
+								sql += " AND o.cTerm LIKE '" + term + "'";
+							if(request.getParameter("credit") != null && request.getParameter("credit") != "")
+								sql += " AND C.credit = " + credit;
 							ResultSet rs = DB.executeQuery(sql);
 							Course c = new Course();
 							Teacher t = new Teacher();
-							Open o = new Open();
+							Open o = new Open(); 
 							if(!rs.next()){
 						%>
 								<tr style="text-align: center;">查不到(・ω・)凸</tr>
@@ -137,7 +165,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</tr>
 						
 			  		<%
-								}
+								 }
 							}
 						}
 					%>
