@@ -66,12 +66,12 @@
 	String cnum = (String) session.getAttribute("coursenum");
 	long openid = Long.parseLong((String) session.getAttribute("openid"));
 	DB db = new DB();
-	List<UserTable> studentList = db.getStudentList(openid);
+	List<StudentGrade> studentList = db.getStudentScore(openid);
 	List<String> keyList = new ArrayList<String>();
 	
 	Collections.sort(studentList);
 
-	Iterator<UserTable> sit = studentList.iterator();
+	Iterator<StudentGrade> sit = studentList.iterator();
 %>
 <body>
 	<div class="layui-layout layui-layout-admin">
@@ -87,21 +87,21 @@
 								if ( studentList.size() == 0) {
 									out.println("<th>无学生名单</th>");
 								} else {
-									out.println("<th>学号</th><th>姓名</th>");
+									out.println("<th>学号</th><th>姓名</th><th>分数</th>");
 								}
 							%>
 						</tr>
 						<%
 							int i = 0;
 							while (sit.hasNext()) {
-								UserTable temp = sit.next();
+								StudentGrade temp = sit.next();
 						%>
 						<tr>
-							<td><%=temp.getId()%></td>
-							<td><%=temp.getUsername()%></td>
+							<td><%=temp.getSnum()%></td>
+							<td><%=temp.getSname()%></td>
 							<td>
-								<input type="text" name="score[<%=i%>]" required  lay-verify="required" placeholder="分数" autocomplete="off" class="layui-input" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/">
-								<input type="text" name="student[<%=i%>]" placeholder="分数" autocomplete="off" style="display:none" value="<%=temp.getId()%>">
+								<input type="text" name="score[<%=i%>]"  placeholder="分数" autocomplete="off" class="layui-input" onkeyup="value=value.replace(/[^\d]/g,'') " ng-pattern="/[^a-zA-Z]/"  value="<%=temp.getScore()%>" onBlur="value=value.replace(/[^\d]/g,'');value=value==''?0:value">
+								<input type="text" name="student[<%=i%>]" placeholder="分数" autocomplete="off" style="display:none" value="<%=temp.getSnum()%>">
 						
 							</td>	
 						</tr>

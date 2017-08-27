@@ -25,6 +25,7 @@ import model.MyFile;
 import model.NamedTime;
 import model.OpenCourse;
 import model.StudentCourse;
+import model.StudentGrade;
 import model.UserTable;
 import model.vo.Course;
 import model.vo.Open;
@@ -617,4 +618,28 @@ public class DB {
 		return student.size();
 	}
 	
+	
+	public List<StudentGrade> getStudentScore(long open_id) {
+		try {
+
+			pstmt = conn
+					.prepareStatement("select * from `select` s,student where s.snum=student.snum and s.open_id=? ");
+			pstmt.setLong(1, open_id);
+
+			List<StudentGrade> al = new ArrayList<StudentGrade>();
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				StudentGrade user = new StudentGrade();
+				user.setSnum(rs.getString("s.snum"));
+				user.setSname(rs.getString("student.sname"));
+				user.setScore(rs.getInt("s.grade"));
+				al.add(user);
+			}
+			return al;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
