@@ -22,18 +22,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="layui-body site-demo">
 
  		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-  		  <legend>教学情况</legend>
+  		  <legend>课程比较</legend>
 		</fieldset>
 		<form class="layui-form" action="">
 		   <div class="layui-form-item">
+		     <div class="layui-inline">
+			   <label class="layui-form-label">课程号</label>
+				<div class="layui-input-inline">
+				  <input type="text" name="cnum" class="layui-input">
+				</div>
+			 </div>
+		     <div class="layui-inline">
 			  <label class="layui-form-label">选择学期</label>
 				<div class="layui-input-inline">
 				  <select name="term" lay-search="">
 				    <option value="%">全部学期</option>
 				<%
-				    Teacher user = (Teacher)session.getAttribute("user");
-					String id = user.getTnum();
-					String sql = "select DISTINCT cTerm from `open` WHERE tNum = '"+id+"'";
+					String sql = "select DISTINCT cTerm from `open`";
 					Open oterm = new Open();
 					ResultSet rs = DB.executeQuery(sql);
 					while (rs.next()) {
@@ -47,6 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				%>
 				  </select>
 				</div>
+			</div>
 			  <div class="layui-inline">
 				<div class="layui-input-block">
 				  <button class="layui-btn" lay-submit="" lay-filter="demo1">查询</button>
@@ -57,67 +63,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 		<div class="panel panel-default" style="margin:30px;">
 	 	<%
-		 	if(request.getParameter("term") != null){
-				String term = request.getParameter("term");
-				String sql1 = "SELECT c.cNum, c.cName, avg(s.grade) as avg,o.cTerm from `select` s, `open` o, course c "
-						+"WHERE o.open_id = s.open_id AND c.cNum = o.cNum "
-						+"AND o.tNum = '"+id+"' AND o.cTerm LIKE '"+term+"' GROUP BY o.cTerm DESC, c.cNum";
-				rs = DB.executeQuery(sql1);
+		 	if(request.getParameter("cnum") != null){
+		 		String cnum = request.getParameter("cnum");
+		 		String term = request.getParameter("term");
+		 		sql = "select O.open_id, C.cNum, cName, T.tNum, tName, avg(grade) as 'avg', "
+		 				+ "count(DISTINCT S.sNum) as people,o.cTerm from course C, `open` O, `select` S, teacher T "
+		 				+ "where O.open_id=S.open_id and C.cNum=O.cNum and T.tNum=O.tNum "
+		 				+"and c.cNum = '"+cnum+"' and o.cTerm like '"+term+"'"
+		 				+"GROUP BY o.cTerm, t.tNum ORDER BY o.cTerm DESC";
+				rs = DB.executeQuery(sql);
 				Select s = new Select();
-				Student st = new Student();
+				Teacher t = new Teacher();
 				Open o = new Open();
 				Course c = new Course();
-				while (rs.next()) {
-					c.setCnum(rs.getString("cNum"));
-					c.setCname(rs.getString("cName"));
-					o.setCterm(rs.getInt("cTerm"));
-					double avg = rs.getDouble("avg");
-	 	%>
-	 	<table border="1" class="layui-table" lay-skin="line">
+				
+		%>
+		<table border="1" class="layui-table" lay-even lay-skin="line">
 		  <thead>
 		  	<tr>
-		  		<th colspan="5" style="text-align:center"><%=o.getRealTerm() %></th>
+		  		<th>课程号</th>
+		  		<th>课程名</th>
+		  		<th>教师号</th>
+		  		<th>教师名</th>
+		  		<th>平均成绩</th>
+		  		<th>选课人数</th>
+		  		<th>学期</th>
 		  	</tr>
-		  	
 		  </thead>
   		<tbody>
-  			<tr>
-		  		<td>课程号</td>
-		  		<td><%= c.getCnum() %></td>
-		  		<td>课程名</td>
-		  		<td><%= c.getCname() %></td>
-		  		<td>平均成绩：<%=avg %></td>
-		  	</tr>
+		<%if(!rs.next()){%>
+		  <tr style="text-align: center;">查不到(・ω・)凸</tr>
+		<%
+			}else{
+				rs = DB.executeQuery(sql);
+			while (rs.next()) {
+				c.setCnum(rs.getString("cNum"));
+				c.setCname(rs.getString("cName"));
+				t.setTnum(rs.getString("tNum"));
+				t.setTname(rs.getString("tName"));
+				o.setCterm(rs.getInt("cTerm")); 
+				int avg = rs.getInt("avg");
+				int people = rs.getInt("people");
+	 	%>
 			<tr>
-				<td>学号</td>
-				<td>姓名</td>
-				<td>学院</td>
-				<td>均绩</td>
-				<td>成绩</td>
+			  <td><%=c.getCnum() %></td>
+			  <td><%=c.getCname() %></td>
+			  <td><%=t.getTnum() %></td>
+			  <td><%=t.getTname() %></td>
+			  <td><%=avg %></td>
+			  <td><%=people %></td>
+			  <td><%=o.getRealTerm() %></td>
 			</tr>
-			<%
-			String sql2 = "SELECT st.sNum, st.sName, s.grade,st.sDept,st.gpa from `select` s, `open` o, student st, course c"
-	 				+" WHERE o.open_id = s.open_id AND s.sNum = st.sNum AND c.cNum = o.cNum "
-	 				+"AND o.tNum = '"+id+"'AND o.cTerm LIKE '"+o.getCterm()+"' ORDER BY  s.sNum, c.cNum";
-			ResultSet rs2 = DB.executeQuery(sql2);
-			while(rs2.next()){
-				st.setSnum(rs2.getString("sNum"));
-				st.setSname(rs2.getString("sName"));
-				s.setGrade(rs2.getInt("grade")); 
-				String dept = rs2.getString("sDept");
-				double gpa = rs2.getDouble("gpa");
-			%>
 			
-			<tr>
-				<td><%= st.getSnum() %></td>
-				<td><%= st.getSname() %></td>
-				<td><%= dept %></td>
-				<td><%= gpa %></td>
-				<td><%= s.getGrade() %></td>
-			</tr>
-			<%} %>
-			
-		<%} %>
+			<%} 
+		}%>
   		</tbody>
 		</table>
 

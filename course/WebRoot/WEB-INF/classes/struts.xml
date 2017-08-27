@@ -48,6 +48,9 @@
 			<result name="success">/mail/mail_send.jsp</result>
 			<result name="error">/mail/error.jsp</result>
 		</action>
+		<action name="score" class="action.Score">
+			<result name="success">/teacher/score.jsp</result>
+		</action>
 	</package>
 	<constant name="struts.multipart.saveDir" value="/tmp"></constant>
 </struts>    

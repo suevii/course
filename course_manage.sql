@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50718
+Source Server         : mysql
+Source Server Version : 80000
 Source Host           : localhost:3306
 Source Database       : course_manage
 
 Target Server Type    : MYSQL
-Target Server Version : 50718
+Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2017-08-26 18:47:56
+Date: 2017-08-26 19:59:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,6 +29,7 @@ CREATE TABLE `course` (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
+INSERT INTO `course` VALUES ('01014125', '微积分(1)', '6');
 INSERT INTO `course` VALUES ('08305013', '编译原理', '5');
 INSERT INTO `course` VALUES ('08305014', '数据库原理(1)', '4');
 INSERT INTO `course` VALUES ('08305015', '数据库原理(2)', '4');
@@ -171,7 +172,7 @@ CREATE TABLE `open` (
   KEY `tNum` (`tNum`),
   CONSTRAINT `cNum` FOREIGN KEY (`cNum`) REFERENCES `course` (`cNum`),
   CONSTRAINT `tNum` FOREIGN KEY (`tNum`) REFERENCES `teacher` (`tNum`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='cTime 三5-6\r\ncTerm 2017-2018秋';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='cTime 三5-6\r\ncTerm 2017-2018秋';
 
 -- ----------------------------
 -- Records of open
@@ -189,6 +190,12 @@ INSERT INTO `open` VALUES ('10', '08306099', '10000001', '20164', '一11-13 四5
 INSERT INTO `open` VALUES ('11', '08306099', '10000007', '20164', '一11-13 四5-6 学院机房上机');
 INSERT INTO `open` VALUES ('12', '08305014', '10000003', '20164', '三1-2 三3-4 学院机房上机 五1-2 研讨');
 INSERT INTO `open` VALUES ('13', '08305014', '10000005', '20164', '三1-2 三3-4 学院机房上机 五1-2 研讨');
+INSERT INTO `open` VALUES ('14', '08305013', '10000002', '20161', '二7-9 四7-8 研讨 四9-10 学院机房上机');
+INSERT INTO `open` VALUES ('15', '08305014', '10000003', '20154', '二7-9 四7-8 研讨 四9-10 学院机房上机');
+INSERT INTO `open` VALUES ('16', '08305013', '10000002', '20151', '二7-9 四7-8 研讨 四9-10 学院机房上机');
+INSERT INTO `open` VALUES ('18', '01014125', '10000008', '20163', '	一1-2 三1-2 五1-2');
+INSERT INTO `open` VALUES ('19', '01014125', '10000008', '20153', '一1-2 三1-2 五1-2');
+INSERT INTO `open` VALUES ('24', '01014125', '10002937', '20163', '一1-2 三1-2 五1-2');
 
 -- ----------------------------
 -- Table structure for `select`
@@ -229,6 +236,17 @@ INSERT INTO `select` VALUES ('12', '14121980', '85');
 INSERT INTO `select` VALUES ('13', '14121034', '82');
 INSERT INTO `select` VALUES ('13', '14122145', '80');
 INSERT INTO `select` VALUES ('13', '14122158', '70');
+INSERT INTO `select` VALUES ('14', '12121105', '75');
+INSERT INTO `select` VALUES ('14', '13121102', '75');
+INSERT INTO `select` VALUES ('14', '13121103', '88');
+INSERT INTO `select` VALUES ('14', '13121104', '78');
+INSERT INTO `select` VALUES ('16', '12121105', '77');
+INSERT INTO `select` VALUES ('18', '13121101', '60');
+INSERT INTO `select` VALUES ('18', '13121102', '90');
+INSERT INTO `select` VALUES ('19', '13121103', '89');
+INSERT INTO `select` VALUES ('19', '13121104', '90');
+INSERT INTO `select` VALUES ('24', '12121105', '78');
+INSERT INTO `select` VALUES ('24', '13121101', '43');
 
 -- ----------------------------
 -- Table structure for `student`
@@ -249,7 +267,12 @@ CREATE TABLE `student` (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES ('14120000', '', '', null, null, null, null, null);
+INSERT INTO `student` VALUES ('12121105', '刘成刚', '男', '上海', '18015872567', '123', '计算机工程与科学学院', '0.000');
+INSERT INTO `student` VALUES ('13121101', '李明', '男', '上海', '13613005486', '123', '通信与信息工程学院', '0.000');
+INSERT INTO `student` VALUES ('13121102', '刘晓明', '男', '安徽', '18913457890', '123', '计算机工程与科学学院', '0.000');
+INSERT INTO `student` VALUES ('13121103', '张颖', '女', '江苏', '18826490423', '123', '计算机工程与科学学院', '0.000');
+INSERT INTO `student` VALUES ('13121104', '刘晶晶', '女', '上海', '13331934111', '123', '计算机工程与科学学院', '0.000');
+INSERT INTO `student` VALUES ('14120000', '测试者', '男', '上海', '10000', '123456', '无', '4.000');
 INSERT INTO `student` VALUES ('14120926', '徐轶玮', '女', '上海', '110', '14120926', '计算机工程与科学学院', '3.700');
 INSERT INTO `student` VALUES ('14121034', '李屯', '女', '上海', '111', '14121034', '计算机工程与科学学院', '3.200');
 INSERT INTO `student` VALUES ('14121980', '江泓', '女', '上海', '112', '14121980', '计算机工程与科学学院', '3.500');
@@ -277,8 +300,10 @@ CREATE TABLE `teacher` (
 -- ----------------------------
 INSERT INTO `teacher` VALUES ('10000001', '邹国兵', '10000001', '男', '	博士', '计算机工程与科学学院', '副教授', '邹国兵，博士，副教授，博士生副导师，硕士生导师。2012年毕业于同济大学，获计算机应用技术专业博士学位。2009年10月-2011年10月，曾作为国家公派留学人员，在美国华盛顿大学（Washington University in St. Louis）计算机科学与工程系，从事两年科研学习工作。2012年8月起，进入上海大学计算机工程与科学学院从事科研与教学工作，组建了服务计算与数据挖掘实验室。');
 INSERT INTO `teacher` VALUES ('10000002', '袁世忠', '10000002', '男', '博士', '计算机工程与科学学院', '副教授', '袁世忠，博士，副教授。1989年4月毕业于上海工业大学（现为上海大学）计算机工程系，获计算机应用硕士学位，并留校从事科研和教学工作；2000年5月晋升为副教授；2011年9月获日本会津大学计算机科学与工程博士学位。主要研究领域为软件工程，计算机网络和安全，医疗信息系统。参与了我国第一个全部自主研发的阿达语言编译系统的研发，主持了上海市科技结合生产重点工业项目“东海实时监测工具软件”的研发以及多项上海市教委基金项目和企业合作研发项目。');
-INSERT INTO `teacher` VALUES ('10000003', '郑宇', '10000003', '女', null, '计算机工程与科学学院', '讲师', '');
-INSERT INTO `teacher` VALUES ('10000004', '滕中梅', '10000004', '女', null, '计算机工程与科学学院', '讲师', null);
+INSERT INTO `teacher` VALUES ('10000003', '郑宇', '10000003', '女', '博士', '计算机工程与科学学院', '讲师', '无');
+INSERT INTO `teacher` VALUES ('10000004', '滕中梅', '10000004', '女', '硕士', '计算机工程与科学学院', '讲师', '无');
 INSERT INTO `teacher` VALUES ('10000005', '宋安平', '10000005', '男', '博士', '计算机工程与科学学院', '副教授', '宋安平（apsong@shu.edu.cn），男，讲师，工学博士。本科毕业留校后，一直在上海大学计算机学院工作，主要从事教学、科研等方面工作，研究方向为医学图像处理及算法、生物信息学、数据库应用和并行计算等。主要进行对大型数据库管理系统中数据挖掘、分析和处理等工作，尤其对数据库中图像数据的建立和处理，三维医学图像相似性方面开展了一定的研究工作，先后主持和参与国家及上海市多项科研项目，发表论文20多篇，主编教材一本，协助指导研究生6名，2009年获得上海大学本科教学比赛一等奖。');
 INSERT INTO `teacher` VALUES ('10000006', '沈俊', '10000006', '男', '硕士', '计算机工程与科学学院', '讲师', '1989年毕业于上海科技大学计算机科学系。毕业后留校工作至今，主要从事计算机科学的科研和教学工作。\r\n在科研工作方面，主要从事数据库和知识库、软件工程、人工智能、信息管理系统及决策支持系统等方面的研究。先后承担或参加的项目有：国防科工委“七.五”军用共性软件项目《决策支持系统生成器》；国防科工委“八.五”军用人工智能预研项目《智能决策支持系统生成器》；《上海信息城》项目；上海市电话号簿公司的《利用Framemaker实现号簿排版的可行性研究》和《易派彩色号簿排版系统》。\r\n在教学工作方面，承担过多门课程的辅导和主讲。主要课程有：《数据结构》、《编译原理》等。');
 INSERT INTO `teacher` VALUES ('10000007', '宋波', '10000007', '男', '硕士', '计算机工程与科学学院', '讲师', '教学理念：\r\n    反对死记硬背，提倡快乐学习。通过灵活多样的各种方法激发学生兴趣，使学生尽可能在课堂内循序渐进地吸收掌握知识，并达到学以致用的目的。\r\n    以“授人以鱼不如授人以渔”为理念，引导培养学生良好的学习习惯和学习能力为主要教学追求和目的，主张大学教育以引领学生学习为主，而不仅仅是知识点的讲述。\r\n\r\n主要研究方向：\r\n    网络多媒体、虚拟仪器、.NET应用开发、面向对象程序设计、JavaEE开发、计算机图形学等。');
+INSERT INTO `teacher` VALUES ('10000008', '吕巍', '10000008', '女', '博士', '理学院', '讲师', '无');
+INSERT INTO `teacher` VALUES ('10002937', '何龙敏', '10002937', '男', '博士', '理学院', '副教授', '曾开设高等数学、概率论与数理统计、应用统计、线性代数、运筹学和经济数学等课程及毕业设计指导；教学中认真负责，能根据教材因人施教且形成自己的教学模式,努力做学生的良师益友；\r\n在国内外已发表论文23篇。');

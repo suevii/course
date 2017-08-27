@@ -25,6 +25,7 @@ import model.MyFile;
 import model.NamedTime;
 import model.OpenCourse;
 import model.StudentCourse;
+import model.StudentGrade;
 import model.UserTable;
 import model.vo.Course;
 import model.vo.Open;
@@ -122,7 +123,7 @@ public class DB {
 		}
 	}
 
-	public ArrayList getStudentCourse(String snum) {// 获取学生的课程
+	/*public ArrayList getStudentCourse(String snum) {// 获取学生的课程
 		try {
 			ArrayList al = new ArrayList();
 			Student student = new Student();
@@ -160,7 +161,7 @@ public class DB {
 			e.printStackTrace();
 			return null;
 		}
-	}
+	}*/
 
 	public HashMap<String, NamedTime> getNamedRecord(String tnum, long open_id) {
 		try {
@@ -596,4 +597,49 @@ public class DB {
 		return null;
 	}
 	
+	public int setScore(List<String> student,List<Integer> score,Long openid){
+		try {
+			pstmt = conn.prepareStatement("update `select` set grade=? where open_id=? and sNum=? ");
+			
+			pstmt.setLong(2, openid);
+			
+			for(int i=0;i<student.size();i++){
+				System.out.print(openid+" "+student.get(i)+' '+score.get(i));
+
+				pstmt.setInt(1, score.get(i));
+				pstmt.setString(3, student.get(i));
+				int rs = pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return student.size();
+	}
+	
+	
+	public List<StudentGrade> getStudentScore(long open_id) {
+		try {
+
+			pstmt = conn
+					.prepareStatement("select * from `select` s,student where s.snum=student.snum and s.open_id=? ");
+			pstmt.setLong(1, open_id);
+
+			List<StudentGrade> al = new ArrayList<StudentGrade>();
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				StudentGrade user = new StudentGrade();
+				user.setSnum(rs.getString("s.snum"));
+				user.setSname(rs.getString("student.sname"));
+				user.setScore(rs.getInt("s.grade"));
+				al.add(user);
+			}
+			return al;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

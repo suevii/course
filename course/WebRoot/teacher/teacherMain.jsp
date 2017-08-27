@@ -34,9 +34,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  			<legend><%=name %>，欢迎你登录课程项目管理系统！</legend>
 			</fieldset>
 			<div class="panel panel-default" style="margin:30px;">
-					<!-- <div class="panel-heading">
-						<h2 class="panel-title">热门课程Top 5</h2>
-					</div> -->
 					<div class="layui-tab">
 					  <ul class="layui-tab-title">
 					    <li class="layui-this">人气课程</li>
@@ -49,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    	<table class="layui-table" lay-skin="line" style="text-align:center">
 									<thead>
 										<tr>
-											<th style="text-align:center">开课号</th>
+											<!-- <th style="text-align:center">开课号</th> -->
 					            <th style="text-align:center">课程号</th>
 					            <th style="text-align:center">课程名</th>
 					            <th style="text-align:center">教师号</th>
@@ -73,7 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					        		String count = rs.getString(6);
 					        %>
 					        		<tr>
-						  					<td><input type="hidden" name="" value="<%= open_id %>"><%= open_id %></td>
+						  					<%-- <td><input type="hidden" name="" value="<%= open_id %>"><%= open_id %></td> --%>
 						  					<td><input type="hidden" name="" value="<%= cNum %>"><%= cNum %></td>
 						  					<td><input type="hidden" name="" value="<%= cName %>"><%= cName %></td>
 						  					<td><input type="hidden" name="" value="<%= tNum %>"><%= tNum %></td>
@@ -89,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<table class="layui-table" lay-skin="line" style="text-align:center">
 								<thead>
 									<tr>
-										<th style="text-align:center">开课号</th>
+										<!-- <th style="text-align:center">开课号</th> -->
 							            <th style="text-align:center">课程号</th>
 							            <th style="text-align:center">课程名</th>
 							            <th style="text-align:center">教师号</th>
@@ -113,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						        		String avgGrade = rs.getString(6);
 					        	%>
 					        		<tr>
-							  			<td><input type="hidden" name="" value="<%= open_id %>"><%= open_id %></td>
+							  			<%-- <td><input type="hidden" name="" value="<%= open_id %>"><%= open_id %></td> --%>
 							  			<td><input type="hidden" name="" value="<%= cNum %>"><%= cNum %></td>
 							  			<td><input type="hidden" name="" value="<%= cName %>"><%= cName %></td>
 							  			<td><input type="hidden" name="" value="<%= tNum %>"><%= tNum %></td>

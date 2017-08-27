@@ -108,6 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<tr style="text-align: center;">查不到(・ω・)凸</tr>
 						<%
 							}else{
+								rs = DB.executeQuery(sql);
 								while (rs.next()) {
 									c.setCnum(rs.getString("C.cNum"));
 									c.setCname(rs.getString("C.cName"));
