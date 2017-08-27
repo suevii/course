@@ -113,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<form name="form1" class="layui-form" action="studentInfo.jsp" method="post">
 						<input type="hidden" name="name">
 						<input type="hidden" name="number" value="<%=st.getSnum()%>">
-						<button class="layui-btn layui-btn-primary" style="border:0" lay-submit="" lay-filter="demo1"><%= st.getSname() %></button>
+						<button class="layui-btn layui-btn-primary" style="border:0;background-color: transparent;color:#000;" lay-submit="" lay-filter="demo1"><%= st.getSname() %></button>
 					</form>
 				</td>
 				<td><%= dept %></td>

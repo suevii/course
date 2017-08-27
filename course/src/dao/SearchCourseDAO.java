@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import model.vo.Open;
+
 import org.hibernate.Query;
 
 import dao.impl.ISearchCourseDAO;
@@ -12,35 +14,40 @@ import factory.HibernateSessionFactory;
 
 public class SearchCourseDAO implements ISearchCourseDAO {
 
-	public ArrayList searchCourse(String cNum, String cName, int credit, 
+	public ArrayList searchCourse(String cNum, String cName, String credit, 
 			String tNum, String tName, String cTerm) {
 		ArrayList al = new ArrayList();
-		String sql = "select * from course C, open O, teacher T "
-					+	"where (O.cNum = '" + cNum 
-					+ "' or C.cName = '" + cName 
-					+ "' or O.tNum = '" + tNum
-					+ "' or T.tName = '" + tName 
-					+ "' or C.credit = " + credit
-					+ " or O.cTerm like '" + cTerm + "')"
-					+ " and T.tNum=O.tNum and C.cNum=O.cNum";
-		String hql = "SELECT * "
-				+ "FROM Course c, Open o, Teacher T "
-				+ "WHERE 1=1";
-		//String hql = "SELECT * "
-				//+ "FROM Select s, Teacher t, Course c, Open o "
-				//+ "WHERE s.id.student.snum=? and o.openId=s.id.open.openId and o.teacher.tnum=t.tnum and o.course.cnum=c.cnum";
+		String hql = "SELECT c.cnum, c.cname, c.credit, t.tnum, t.tname, o.ctime, o.cterm "
+				+ "FROM Course c, Open o, Teacher t "
+				+ "WHERE 1=1 AND t.tnum = o.teacher.tnum AND c.cnum = o.course.cnum ";
+		if(cNum != null && cNum != "")
+			hql += " AND c.cnum = '" + cNum + "'";
+		if(cName != null && cName != "")
+			hql += " AND c.cname = '" + cName + "'";
+		if(tNum != null && tNum != "")
+			hql += " AND t.tnum = '" + tNum + "'";
+		if(tName != null && tName != "")
+			hql += " AND t.tname = '" + tName + "'";
+		if(cTerm != null && cTerm != "")
+			hql += " AND o.cterm LIKE '%" + cTerm + "'";
+		if(credit != null && credit != ""){
+			int nCredit = Integer.parseInt(credit);
+			hql += " AND c.credit = " + nCredit;
+		}
 		Query query = HibernateSessionFactory.getSession().createQuery(hql);
-		query.setParameter(0, sNum);
 		List<Object[]> courses = query.list();
 		Iterator it = courses.iterator();
 		for(Object[] object : courses){
 			HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put("open_id", object[0]);
-            map.put("cNum", object[1]);
-            map.put("tNum", object[2]);
-            map.put("cName", object[3]);
+            map.put("cNum", object[0]);
+            map.put("cName", object[1]);
+            map.put("credit", object[2]);
+            map.put("tNum", object[3]);
             map.put("tName", object[4]);
-            map.put("cTerm", object[5]);
+            map.put("cTime", object[5]);
+            Open open = new Open();
+            open.setCterm(Integer.valueOf(String.valueOf(object[6])));
+            map.put("cTerm", open.getRealTerm());
             al.add(map);
         }
 		HibernateSessionFactory.closeSession();
