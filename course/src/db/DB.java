@@ -27,12 +27,8 @@ import model.OpenCourse;
 import model.StudentCourse;
 import model.StudentGrade;
 import model.UserTable;
-import model.vo.Course;
-import model.vo.Open;
-import model.vo.Select;
-import model.vo.SelectId;
-import model.vo.Student;
-import model.vo.Teacher;
+import model.vo.*;
+
 public class DB {
 	private String DBname = "course_manage";
 	private String DBuser = "course";
@@ -122,46 +118,6 @@ public class DB {
 			return null;
 		}
 	}
-
-	/*public ArrayList getStudentCourse(String snum) {// 获取学生的课程
-		try {
-			ArrayList al = new ArrayList();
-			Student student = new Student();
-			student.setSnum(snum);
-			pstmt = conn.prepareStatement(
-					"SELECT s.open_id, s.sNum, c.cNum, t.tNum, c.cName, t.tName, o.cTerm "
-					+ "FROM `select` s,teacher t, course c, open o "
-					+ "WHERE s.sNum=? and o.open_id=s.open_id and o.tNum=t.tNum and o.cNum=c.cNum;");
-			pstmt.setString(1, snum);
-			ResultSet rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				Course course = new Course();
-				course.setCnum(rs.getString("cNum"));
-				course.setCname(rs.getString("cName"));
-				Teacher teacher = new Teacher();
-				teacher.setTnum(rs.getString("tNum"));
-				teacher.setTname(rs.getString("tName"));
-				Open open = new Open();
-				open.setCterm(rs.getInt("cTerm"));
-				open.setOpenId(rs.getLong("open_id"));
-				Select select = new Select();
-				SelectId selectId = new SelectId(open, student);
-				select.setId(selectId);
-				map.put("course", course);
-				map.put("teacher", teacher);
-				map.put("open", open);
-				map.put("select", select);
-				al.add(map);
-				
-			}
-			return al;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}*/
 
 	public HashMap<String, NamedTime> getNamedRecord(String tnum, long open_id) {
 		try {

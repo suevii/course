@@ -22,7 +22,6 @@ public class StudentGrade  implements Comparable<StudentGrade>{
 	public void setScore(Integer score) {
 		this.score = score;
 	}
-	@Override
 	public int compareTo(StudentGrade o) {
 		String snum=o.getSnum();
 		return this.snum.compareTo(snum);

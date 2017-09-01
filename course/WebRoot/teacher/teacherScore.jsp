@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	<%
 		 	if(request.getParameter("term") != null){
 				String term = request.getParameter("term");
-				String sql1 = "SELECT c.cNum, c.cName, avg(s.grade) as avg,o.cTerm from `select` s, `open` o, course c "
+				String sql1 = "SELECT c.cNum, c.cName, avg(s.grade) as avg, o.cTerm, o.cTime, o.open_id from `select` s, `open` o, course c "
 						+"WHERE o.open_id = s.open_id AND c.cNum = o.cNum "
 						+"AND o.tNum = '"+id+"' AND o.cTerm LIKE '"+term+"' GROUP BY o.cTerm DESC, c.cNum";
 				rs = DB.executeQuery(sql1);
@@ -71,9 +71,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					c.setCnum(rs.getString("cNum"));
 					c.setCname(rs.getString("cName"));
 					o.setCterm(rs.getInt("cTerm"));
+					o.setOpenId(rs.getLong("open_id"));
+					o.setCtime(rs.getString("cTime"));
 					double avg = rs.getDouble("avg");
+					int attend = (int)(DB.getCourseAttendence(o.getOpenId())*100);
 	 	%>
-	 	<table border="1" class="layui-table" lay-skin="line" >
+	 	<table border="1" class="layui-table" style="text-align:center" lay-skin="line" >
 		  <thead>
 		  	<tr>
 		  		<th colspan="5" style="text-align:center"><%=o.getRealTerm() %></th>
@@ -82,16 +85,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<tbody>
   			<tr>
 		  		<td>课程号</td>
-		  		<td><%= c.getCnum() %></td>
 		  		<td>课程名</td>
+		  		<td>上课时间</td>
+		  		<td>出勤率(%)</td>
+		  		<td>平均成绩</td>
+		  		
+		  		
+		  	</tr>
+		  	<tr>
+		  		<td><%= c.getCnum() %></td>
 		  		<td><%= c.getCname() %></td>
-		  		<td>平均成绩：<%=avg %></td>
+		  		<td><%=o.getCtime() %></td>
+		  		<td><%=attend %></td>  		
+		  		<td><%=avg %></td>
 		  	</tr>
 			<tr>
 				<td>学号</td>
 				<td>姓名</td>
 				<td>学院</td>
-				<td>均绩</td>
+				<td>出勤率(%)</td>
 				<td>成绩</td>
 			</tr>
 			<%
@@ -104,7 +116,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				st.setSname(rs2.getString("sName"));
 				s.setGrade(rs2.getInt("grade")); 
 				String dept = rs2.getString("sDept");
-				double gpa = rs2.getDouble("gpa");
+				//double gpa = rs2.getDouble("gpa");
+				int sattend = (int)(DB.getStudentAttendence(o.getOpenId(), st.getSnum())*100);
 			%>
 			
 			<tr>
@@ -113,11 +126,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<form name="form1" class="layui-form" action="studentInfo.jsp" method="post">
 						<input type="hidden" name="name">
 						<input type="hidden" name="number" value="<%=st.getSnum()%>">
-						<button class="layui-btn layui-btn-primary" style="border:0" lay-submit="" lay-filter="demo1"><%= st.getSname() %></button>
+						<button class="layui-btn layui-btn-primary" style="border:0;background-color: transparent;color:#000;" lay-submit="" lay-filter="demo1"><%= st.getSname() %></button>
 					</form>
 				</td>
 				<td><%= dept %></td>
-				<td><%= gpa %></td>
+				<td><%= sattend %></td>
 				<td><%= s.getGrade() %></td>
 			</tr>
 			<%} %>

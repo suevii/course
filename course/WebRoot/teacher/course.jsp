@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				Teacher user = (Teacher)session.getAttribute("user");
 				String id = user.getTnum();
 				
- 				Semester sem = new Semester();
+ 				model.Semester sem = new model.Semester();
  				int nterm = sem.getTerm();
  				ArrayList al = DB.getTeacherCourse(id);
  				Iterator iter=al.iterator();

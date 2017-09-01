@@ -11,8 +11,8 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-import dao.ILoginDAO;
 import dao.LoginDAO;
+import dao.impl.ILoginDAO;
 import db.DB;
 import model.UserTable;
 import model.vo.*;

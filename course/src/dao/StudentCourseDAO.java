@@ -14,6 +14,7 @@ import model.vo.Teacher;
 
 import org.hibernate.Query;
 
+import dao.impl.IStudentCourseDAO;
 import factory.HibernateSessionFactory;
 
 public class StudentCourseDAO implements IStudentCourseDAO {

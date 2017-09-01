@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,model.*,java.text.SimpleDateFormat,db.DB" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,model.*,java.text.SimpleDateFormat,db.DB, model.vo.*" pageEncoding="UTF-8"%>
 <jsp:useBean id="DB" scope="page" class = "db.DB" />
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%
@@ -10,14 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
     <title>课程管理系统</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -37,8 +30,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</fieldset>
 			
 			<%
-			UserTable user = (UserTable)session.getAttribute("user");
-  			String id = user.getId();
+			String id = null;
+			Object user = session.getAttribute("user");
+			user = (Student)user;
+			id = ((Student)user).getSnum();
 			Calendar calendar = Calendar.getInstance();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String dateNow = dateFormat.format(calendar.getTime());
