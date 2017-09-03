@@ -2,6 +2,7 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ page language="java" import="com.opensymphony.xwork2.ActionContext,model.*,java.sql.*" %>
 <jsp:useBean id="MySQLDB" class="db.DB"></jsp:useBean>
+<%@page import="model.vo.*"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -48,10 +49,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        </tr>
 	        </thead>
 	        <%
-	        	UserTable user = (UserTable)session.getAttribute("user");
-	        	String userId = user.getId();
-	        	String openId = (String)session.getAttribute("openid");	//open_id
-						int open_id = Integer.parseInt(openId);
+	        	Object user = session.getAttribute("user");
+						user = (Teacher)user;
+						String userId = ((Teacher)user).getTnum();
+	        	String strOpen_id = (String)session.getAttribute("openid");	//open_id
+						int open_id = Integer.parseInt(strOpen_id);
+						
 						String sql = "select * "
 											 + "from course_file cf, file f "
 											 + "where cf.file_id = f.file_id and open_id = " + open_id;
