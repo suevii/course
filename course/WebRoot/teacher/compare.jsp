@@ -78,24 +78,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				Course c = new Course();
 				
 		%>
-		<table border="1" class="layui-table" lay-even lay-skin="line">
-		  <thead>
-		  	<tr>
-		  		<th>课程号</th>
-		  		<th>课程名</th>
-		  		<th>教师号</th>
-		  		<th>教师名</th>
-		  		<th>平均成绩</th>
-		  		<th>选课人数</th>
-		  		<th>学期</th>
-		  	</tr>
-		  </thead>
-  		<tbody>
+		
 		<%if(!rs.next()){%>
-		  <tr style="text-align: center;">查不到(・ω・)凸</tr>
+		  <h2>查不到(・ω・)凸</h2>
 		<%
 			}else{
+				c.setCnum(rs.getString("cNum"));
+				c.setCname(rs.getString("cName"));
 				rs = DB.executeQuery(sql);
+		%>
+		<table border="1" class="layui-table" style="text-align:center" lay-even lay-skin="line">
+		  <thead>
+		  	<tr>
+		  		<%-- <th style="text-align:center">课程号</th>
+		  		<th style="text-align:center"><%=c.getCnum()  %></th>
+		  		<th style="text-align:center">课程名</th> --%>
+		  		<th style="text-align:center" colspan="5"><%=c.getCname()%></th>
+		  	</tr>
+		  	<tr>
+		  		<th style="text-align:center">教师号</th>
+		  		<th style="text-align:center">教师名</th>
+		  		<th style="text-align:center">平均成绩</th>
+		  		<th style="text-align:center">选课人数</th>
+		  		<th style="text-align:center">学期</th>
+		  	</tr>
+		  </thead>
+		<%
 			while (rs.next()) {
 				c.setCnum(rs.getString("cNum"));
 				c.setCname(rs.getString("cName"));
@@ -105,11 +113,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				int avg = rs.getInt("avg");
 				int people = rs.getInt("people");
 	 	%>
+	 	
+  		<tbody>
 			<tr>
-			  <td><%=c.getCnum() %></td>
-			  <td><%=c.getCname() %></td>
 			  <td><%=t.getTnum() %></td>
-			  <td><%=t.getTname() %></td>
+			  <td>
+				<form class="layui-form" action="teacherInfo.jsp" method="post">
+					<input type="hidden" name="name">
+					<input type="hidden" name="number" value="<%= t.getTnum() %>">
+					<button class="layui-btn layui-btn-primary" style="background-color: transparent;border:0;color:#000;" lay-submit="" lay-filter="demo1"><%= t.getTname() %></button>
+				</form>
+				</td>
 			  <td><%=avg %></td>
 			  <td><%=people %></td>
 			  <td><%=o.getRealTerm() %></td>

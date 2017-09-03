@@ -63,3 +63,6 @@ course/WebRoot/WEB-INF/classes/action/CourseAction.class
 *.class
 course/WebRoot/WEB-INF/classes/action/CourseAction.class
 *.class
+*.class
+course/.settings/org.eclipse.jdt.core.prefs
+*.class

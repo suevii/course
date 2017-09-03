@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80000
 File Encoding         : 65001
 
-Date: 2017-08-26 19:59:03
+Date: 2017-08-28 14:30:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -139,6 +139,11 @@ CREATE TABLE `named_record` (
 -- ----------------------------
 -- Records of named_record
 -- ----------------------------
+INSERT INTO `named_record` VALUES ('25', '12121105');
+INSERT INTO `named_record` VALUES ('27', '13121103');
+INSERT INTO `named_record` VALUES ('28', '13121104');
+INSERT INTO `named_record` VALUES ('29', '13121104');
+INSERT INTO `named_record` VALUES ('30', '13121104');
 
 -- ----------------------------
 -- Table structure for `named_time`
@@ -150,12 +155,19 @@ CREATE TABLE `named_time` (
   `open_id` bigint(20) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   PRIMARY KEY (`named_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of named_time
 -- ----------------------------
 INSERT INTO `named_time` VALUES ('23', '10000002', '1', '2017-05-30 20:20:13');
+INSERT INTO `named_time` VALUES ('24', '10000002', '14', '2017-08-28 13:54:50');
+INSERT INTO `named_time` VALUES ('25', '10000002', '14', '2017-08-28 13:54:55');
+INSERT INTO `named_time` VALUES ('26', '10000002', '14', '2017-08-28 13:55:01');
+INSERT INTO `named_time` VALUES ('27', '10000002', '14', '2017-08-28 13:55:06');
+INSERT INTO `named_time` VALUES ('28', '10000002', '14', '2017-08-28 13:55:08');
+INSERT INTO `named_time` VALUES ('29', '10000002', '14', '2017-08-28 13:55:11');
+INSERT INTO `named_time` VALUES ('30', '10000002', '14', '2017-08-28 13:55:16');
 
 -- ----------------------------
 -- Table structure for `open`
