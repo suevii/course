@@ -274,6 +274,24 @@ public class DB {
 			return null;
 		}
 	}
+	
+	public String getCourseNameByOpen(Long open_id) {
+		String cname = null;
+		try {
+
+			pstmt = conn.prepareStatement("SELECT c.cName from course c,open o WHERE o.open_id=? and o.cNum=c.cNum;");
+			pstmt.setLong(1, open_id);
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				cname = rs.getString(1);
+			}
+			return cname;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public MyFile findFile(String name, String owner_num) {
 		try {
