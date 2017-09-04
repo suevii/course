@@ -21,18 +21,19 @@ public class SearchCourseDAO implements ISearchCourseDAO {
 				+ "FROM Course c, Open o, Teacher t "
 				+ "WHERE 1=1 AND t.tnum = o.teacher.tnum AND c.cnum = o.course.cnum ";
 		if(cNum != null && cNum != "")
-			hql += " AND c.cnum = '" + cNum + "'";
+			hql += " AND c.cnum LIKE '%" + cNum + "%'";
 		if(cName != null && cName != "")
-			hql += " AND c.cname = '" + cName + "'";
+			hql += " AND c.cname LIKE '%" + cName + "%'";
 		if(tNum != null && tNum != "")
-			hql += " AND t.tnum = '" + tNum + "'";
+			hql += " AND t.tnum LIKE '%" + tNum + "%'";
 		if(tName != null && tName != "")
-			hql += " AND t.tname = '" + tName + "'";
+			hql += " AND t.tname LIKE '%" + tName + "%'";
 		if(cTerm != null && cTerm != "")
 			hql += " AND o.cterm LIKE '%" + cTerm + "'";
 		if(credit != null && credit != ""){
 			int nCredit = Integer.parseInt(credit);
 			hql += " AND c.credit = " + nCredit;
+
 		}
 		Query query = HibernateSessionFactory.getSession().createQuery(hql);
 		List<Object[]> courses = query.list();
