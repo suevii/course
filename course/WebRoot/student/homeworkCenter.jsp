@@ -43,6 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			Iterator iter=al.iterator();
 	  		while(iter.hasNext()){
 	  			Homework task = (Homework)iter.next();
+	  			String courseName=db.getCourseNameByOpen(task.getOpen_id());
 	  			String title = task.getTitle();
 	  			String content = task.getContent();
 	  			Date out_time = task.getOut_time();
@@ -62,6 +63,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <col width="150">
 					    <col>
 					  </colgroup>
+					  <tr>
+		        		<td>课程</td>
+		        		<td><%=courseName %></td>		        		
+		      		</tr>
 		      		<tr>
 		        		<td>任务详情</td>
 		        		<td><%=content %></td>		        		

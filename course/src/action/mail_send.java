@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionContext;
 import db.DB;
 import model.MailTable;
 import model.UserTable;
+import model.vo.*;
 
 public class mail_send {
 	private String num_to;
@@ -19,9 +20,19 @@ public class mail_send {
 		DB db=new DB();
 		context=ActionContext.getContext();
 		session=context.getSession();
-		UserTable user=(UserTable) session.get("user");
+		String character = (String)session.get("character");
+		String id = null;
+		Object user = session.get("user");
+		if(character.equals("student")){
+			user = (Student)user;
+			id = ((Student)user).getSnum();
+		}else if(character.equals("teacher")){
+			user = (Teacher)user;
+			id = ((Student)user).getSnum();
+		}
+		//UserTable user=(UserTable) session.get("user");
 		MailTable mail=new MailTable();
-		mail.setNum_from(user.getId());
+		mail.setNum_from(id);
 		mail.setNum_to(num_to);
 		
 		mail.setTitle(title);
