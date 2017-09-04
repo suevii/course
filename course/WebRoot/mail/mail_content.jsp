@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*,model.*" pageEncoding="UTF-8"%>
 <%@page import="model.MailTable"%>
+<%@page import="model.vo.Student"%>
+<%@page import="model.vo.Teacher"%>
 <%@page import="db.DB"%>
 <%
 String path = request.getContextPath();
@@ -31,10 +33,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
 <body class="mailcontent">
    <div class="layui-layout layui-layout-admin">
-   <%  UserTable user = (UserTable)session.getAttribute("user");
-			int level = user.getLevel(); 
-			String h1= level==0?"/student/head.jsp":"/teacher/head.jsp";
-			String h2= level==0?"/student/left.jsp":"/teacher/left.jsp";
+   <%  String character = (String)session.getAttribute("character");
+				int level = -1;
+				Object user = session.getAttribute("user");
+				String name = null;
+				if(character.equals("student")){
+					user = (Student)user;
+					level = 0;
+				}else if(character.equals("teacher")){
+					user = (Teacher)user;
+					level = 1;
+				}
+				String h1= level==0?"/student/head.jsp":"/teacher/head.jsp";
+				String h2= level==0?"/student/left.jsp":"/teacher/left.jsp";
 			System.out.println(level); %>
       <jsp:include page="<%=h1%>"/>
       <jsp:include page="<%=h2%>"/>

@@ -28,7 +28,7 @@ public class mail_send {
 			id = ((Student)user).getSnum();
 		}else if(character.equals("teacher")){
 			user = (Teacher)user;
-			id = ((Student)user).getSnum();
+			id = ((Teacher)user).getTnum();
 		}
 		//UserTable user=(UserTable) session.get("user");
 		MailTable mail=new MailTable();
