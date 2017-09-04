@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import db.DB;
 import model.UserTable;
+import model.vo.Teacher;
 
 public class UploadAction extends ActionSupport {
 	private File upload;
@@ -22,8 +23,8 @@ public class UploadAction extends ActionSupport {
 	public String execute() throws Exception{
 		ActionContext context = ActionContext.getContext();
 		Map session = context.getSession();
-		UserTable user = (UserTable)session.get("user");		//teacher
-		String userId = user.getId();
+		Teacher user = (Teacher)session.get("user");		//teacher
+		String userId = user.getTnum();
 		String openId = (String)session.get("openid");	//cnum
 		int open_id = Integer.parseInt(openId);
 		
