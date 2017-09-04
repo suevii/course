@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql
-Source Server Version : 80000
+Source Server         : localhost_3306
+Source Server Version : 50718
 Source Host           : localhost:3306
 Source Database       : course_manage
 
 Target Server Type    : MYSQL
-Target Server Version : 80000
+Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2017-08-28 14:30:57
+Date: 2017-09-04 10:04:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -119,12 +119,15 @@ CREATE TABLE `mail` (
   `num_to` varchar(10) DEFAULT NULL,
   `open_id` bigint(20) DEFAULT NULL,
   `content` text,
+  `title` varchar(30) DEFAULT NULL,
+  `time` date DEFAULT NULL,
   PRIMARY KEY (`mail_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mail
 -- ----------------------------
+INSERT INTO `mail` VALUES ('1', '14122158', '14122145', null, '1', '1', '2017-09-04');
 
 -- ----------------------------
 -- Table structure for `named_record`
