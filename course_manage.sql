@@ -244,8 +244,16 @@ CREATE TABLE `select` (
 INSERT INTO `select` VALUES ('1', '14120926', '84');
 INSERT INTO `select` VALUES ('1', '14121980', '84');
 INSERT INTO `select` VALUES ('2', '14121034', '80');
+INSERT INTO `select` VALUES ('3', '12121105', '45');
+INSERT INTO `select` VALUES ('3', '13121101', '56');
+INSERT INTO `select` VALUES ('3', '13121102', '45');
+INSERT INTO `select` VALUES ('3', '13121103', '86');
+INSERT INTO `select` VALUES ('3', '13121104', '90');
 INSERT INTO `select` VALUES ('3', '14120926', '79');
+INSERT INTO `select` VALUES ('3', '14121034', '76');
 INSERT INTO `select` VALUES ('3', '14121980', '74');
+INSERT INTO `select` VALUES ('3', '14122145', '80');
+INSERT INTO `select` VALUES ('3', '14122158', '80');
 INSERT INTO `select` VALUES ('4', '14122158', '75');
 INSERT INTO `select` VALUES ('5', '14120926', '84');
 INSERT INTO `select` VALUES ('5', '14121980', '85');
