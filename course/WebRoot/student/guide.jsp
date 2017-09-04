@@ -22,17 +22,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 
-			<div class="layui-header header header-demo">
-				<div class="layui-main" >
-					<p class="logo">课程管理系统</p>
-					<ul class="layui-nav daohang">					
-						<li class="layui-nav-item ">
+			<div class="layui-header header header-demo" style="height: 80px;">
+				<div class="layui-main"  style="text-align: right;">
+					<div class="logo" style="text-align: center;">课程管理系统<p style="font-size: 12px;line-height: 12px;position: relative;top: -10px;">Course Management System</p></div>
+					<ul class="layui-nav daohang" style="height: 80px;">					
+						<li class="layui-nav-item " style="height:80px;line-height:80px;position: absolute;bottom: 0px;right: 115px;">
 							<a href="/course/student/homework.jsp">任务</a>
 						</li>
-						<li class="layui-nav-item ">
+						<li class="layui-nav-item " style="height:80px;line-height:80px;position: absolute;bottom: 0px;right: 65px;">
 							<a href="/course/student/download.jsp">资料</a>
 						</li>
-						<li class="layui-nav-item ">
+						<li class="layui-nav-item " style="height:80px;line-height:80px;position: absolute;bottom: 0px;right: 15px;">
 							<a href="/course/logout.jsp">注销</a>
 						</li>
 					</ul>

@@ -17,6 +17,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		.layui-nav-child{
 			padding-left: 25px !important;
 		}
+		dl{
+			margin-bottom: 0px !important;
+		}
 	</style>
 	<body>
 			<div class="layui-side layui-bg-black" style="top: 80px;">
