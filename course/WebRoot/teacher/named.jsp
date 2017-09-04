@@ -73,7 +73,7 @@
 	while (it.hasNext()) {
 		keyList.add(it.next());
 	}
-	Collections.reverse(keyList);
+	Collections.sort(keyList);
 	Collections.sort(studentList);
 	Iterator<String> it2 = keyList.iterator();
 
@@ -105,13 +105,13 @@
 						<tr>
 						
 							<%
-								if (keyList.size() == 0 || studentList.size() == 0) {
+								if ( studentList.size() == 0) {
 									out.println("<th>无点名记录</th>");
 								} else {
-									out.println("<th>学号</th><th>姓名</th>");
+									out.println("<th style='width:50px'>学号</th><th  style='width:50px'>姓名</th> <th   class='lastth'  style='width:50px'>点名</th>");
 								}
 							%>
-<th   class="lastth">点名</th>
+							
 
 
 							<%
@@ -121,7 +121,7 @@
 							<%
 								}
 							%>
-							
+							<th>  </th>
 						</tr>
 						<%
 							int i = 0;
