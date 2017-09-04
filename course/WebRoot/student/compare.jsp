@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		%>
 		
 		<%if(!rs.next()){%>
-		  <h2>查不到(・ω・)凸</h2>
+		  <h2>查不到(・ω・)</h2>
 		<%
 			}else{
 				c.setCnum(rs.getString("cNum"));

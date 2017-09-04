@@ -38,6 +38,7 @@ public class DB {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	ResultSet rs;
+	int term=20171;
 
 	public DB() {
 		stmt = null;
