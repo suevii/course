@@ -13,8 +13,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<link rel="stylesheet" href="/course/layui/css/layui.css">
 			<link rel="stylesheet" href="/course/css/index.css">
 	</head>
+	<style type="text/css">
+		.layui-nav-child{
+			padding-left: 25px !important;
+		}
+	</style>
 	<body>
-			<div class="layui-side layui-bg-black">
+			<div class="layui-side layui-bg-black" style="top: 80px;">
 				<div class="layui-side-scroll">
 					<ul class="layui-nav layui-nav-tree site-demo-nav">
 						<li class="layui-nav-item layui-nav-itemed">
